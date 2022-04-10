@@ -32,7 +32,7 @@
                     <tr>
                         <th>SERVICE</th>
                         <th>DISCOUNT</th>
-                        <th>TOTAL</th>
+                        <th>PRICE</th>
                     </tr>
                     <div>
                         <tr>
