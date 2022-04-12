@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head>	
     <script src="https://kit.fontawesome.com/66bf06966e.js" crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
 <title>Billing</title>
