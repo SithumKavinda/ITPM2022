@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+* {
+    /* border: 1px solid black; */
+    transition: 0.3s;
+}
+
 /* Scroll Bar */
 ::-webkit-scrollbar {
     width: 5px;
@@ -16,12 +21,12 @@
 }
 
 .header-section {
-    padding: 5px 0 50px;
+    padding: 5px 50px 5px;
 }
 
 .header-section h1 {
     color: rgb(203, 62, 14);
-    font-size: 30pt;
+    font-size: 35pt;
 }
 
 .body-section {
@@ -112,6 +117,10 @@ td {
     font-size: 14pt;
 }
 
+.generate-invoice-section button:hover {
+    background-color: rgb(203, 62, 14);
+}
+
 /* Services Section */
 .services-section {
     padding-left: 30px;
@@ -174,6 +183,7 @@ td {
     background-color: rgb(68, 120, 112);
     border: none;
     color: whitesmoke;
+    /* font-size: 15pt; */
 }
 
 .bill-history-area {
@@ -191,4 +201,8 @@ td {
     padding: 10px 30px 10px;
     color: whitesmoke;
     font-size: 14pt;
+}
+
+.bill-history-area input:hover {
+    background-color: rgb(203, 62, 14);
 }
