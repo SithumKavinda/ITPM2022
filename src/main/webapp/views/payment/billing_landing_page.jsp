@@ -18,19 +18,19 @@
         <!-- Table Section -->
         <div class="table-section">
             <div class="search-section">
-                <form action="#">
+                <form action="#" method="post">
                     <div class="search-box">
-                        <input type="text" id="searchService">
+                        <input type="text" name="searchText">
                     </div>
                     <div class="search-button">
-                        <input type="submit" value="Search" id="searchButton">
+                        <input type="submit" value="Search" name="searchSubmit">
                     </div>
                 </form>
             </div>
             <div class="data-section">
                 <table>
                     <tr>
-                        <th>SERVICE</th>
+                        <th>SERVICE</th> 
                         <th>DISCOUNT</th>
                         <th>PRICE</th>
                     </tr>
