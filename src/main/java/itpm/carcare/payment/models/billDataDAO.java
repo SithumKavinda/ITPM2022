@@ -18,7 +18,7 @@ public class billDataDAO {
 	// retrieve method
 	public static List<billData> retrieveBillData(int billNo) {
 		
-		ArrayList<billData> bill = new ArrayList<>();
+		ArrayList<billData> billList = new ArrayList<>();
 		
 		try {
 			
@@ -33,7 +33,7 @@ public class billDataDAO {
 				double price = rs.getDouble(4);
 				
 				billData billItem = new billData(serviceName, discount, price);
-				bill.add(billItem);
+				billList.add(billItem);
 			}
 			
 		} catch (Exception e) {
@@ -42,7 +42,7 @@ public class billDataDAO {
 			
 		}
 		
-		return bill;
+		return billList;
 		
 	}
 	
