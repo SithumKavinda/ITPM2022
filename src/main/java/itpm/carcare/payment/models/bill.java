@@ -1,17 +1,17 @@
 package itpm.carcare.payment.models;
 
-public class billData {
+public class bill {
 	
 	private int billNo;
 	private String serviceName;
 	private double discount;
 	private double price;
 	
-	public billData() {
+	public bill() {
 		super();
 	}
 	
-	public billData(int billNo, String serviceName, double discount, double price) {
+	public bill(int billNo, String serviceName, double discount, double price) {
 		super();
 		this.billNo = billNo;
 		this.serviceName = serviceName;
@@ -19,7 +19,7 @@ public class billData {
 		this.price = price;
 	}
 
-	public billData(String serviceName, double discount, double price) {
+	public bill(String serviceName, double discount, double price) {
 		super();
 		this.serviceName = serviceName;
 		this.discount = discount;

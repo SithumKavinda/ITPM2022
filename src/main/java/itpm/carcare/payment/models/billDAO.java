@@ -8,17 +8,16 @@ import java.util.List;
 
 import itpm.carcare.DBConnect;
 
-public class billDataDAO {
+public class billDAO {
 	
-	private static boolean isSuccess;
 	private static Connection con = null;
 	private static Statement stmt = null;
 	private static ResultSet rs = null;
 	
 	// retrieve method
-	public static List<billData> retrieveBillData(int billNo) {
+	public static List<bill> retrieveBillData(int billNo) {
 		
-		ArrayList<billData> billList = new ArrayList<>();
+		ArrayList<bill> billList = new ArrayList<>();
 		
 		try {
 			
@@ -32,7 +31,7 @@ public class billDataDAO {
 				double discount = rs.getDouble(3);
 				double price = rs.getDouble(4);
 				
-				billData billItem = new billData(serviceName, discount, price);
+				bill billItem = new bill(serviceName, discount, price);
 				billList.add(billItem);
 			}
 			
@@ -48,4 +47,22 @@ public class billDataDAO {
 	
 	
 	// delete method
+	public static boolean deleteBillData(int billNo) {
+		
+		boolean isDeleted = false;
+		
+		try {
+			
+			con = DBConnect.getConnection();
+			stmt = con.createStatement();
+			String sql = "delete * from test_bill where billNo = '"+billNo+"'";
+			isDeleted = stmt.execute(sql);
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return isDeleted;
+		
+	}
 }
