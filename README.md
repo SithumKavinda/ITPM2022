@@ -2,7 +2,7 @@
 
 # Functionalities
 - Inventory Management [Kaveesha]
-- Employee Management [Tharushi]
+- Employee Management[Tharushi]
 - Customer Management [Janith]
 - Payment Management [Sithum]
 
