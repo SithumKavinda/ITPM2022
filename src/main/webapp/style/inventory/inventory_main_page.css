@@ -1,4 +1,28 @@
 @charset "ISO-8859-1";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    /* border: 1px solid black; */
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: black;
+    padding: 50px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-div {
+    background-color: white;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+}
 
 .header_section {
     padding: 5px 50px 5px;
@@ -78,7 +102,7 @@
 th,
 td {
     padding: 15px;
-    border-radius: 2px;
+    border-radius: 5px;
     background-color: rgb(167, 163, 163);
 }
 
@@ -92,21 +116,18 @@ td {
 }*/
 
 .button_group_section {
-    padding-left: 50px;
-}
-
-.button_group {
-    display: grid;
-    grid-template-columns: auto;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    grid-gap: 10px;
-    height: 50%;
-    padding: 10px;
+    justify-content: center;
+    padding: 40px;
 }
 
-.button_group div {
+.button_group_section div {
     border-radius: 5px;
     padding: 5px 10px 5px;
+    margin: 5px;
+    width: 100%;
     word-wrap: break-word;
     height: 100px;
     text-align: center;
@@ -119,4 +140,3 @@ td {
     color: whitesmoke;
     font-size: 15pt;
 }
-
