@@ -11,17 +11,17 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Education/Libraries/JDBC-JAR-DEPENDENCIES/jstl-1.2.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="D:/Education/Libraries/JDBC-JAR-DEPENDENCIES/mysql-connector-java-8.0.13.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Education/Libraries/JDBC-JAR-DEPENDENCIES/servlet-api-2.5.jar">
+	<classpathentry kind="lib" path="C:/Users/sithu/Downloads/jar_files/jstl-1.2.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/sithu/Downloads/jar_files (1)/servlet-api-3.0-7.0.0pre2.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

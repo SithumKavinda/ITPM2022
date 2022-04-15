@@ -2,6 +2,7 @@
 
 * {
     transition: 0.3s;
+    border: 1px solid black;
 }
 
 /* Scroll Bar */
@@ -19,189 +20,124 @@
     border-radius: 10px;
 }
 
-.header-section {
-    padding: 5px 50px 5px;
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgb(118, 45, 20);
+    background: linear-gradient(90deg, rgb(118, 45, 20) 0%, rgb(56, 98, 92) 100%);
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
 }
 
-.header-section h1 {
-    color: rgb(203, 62, 14);
-    font-size: 35pt;
+.main-container {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 1px 1px 50px rgb(0, 0, 0, 0.7);
+    padding: 20px;
 }
 
-.body-section {
-    display: grid;
-    grid-template-columns: repeat(2, 50%);
-    justify-content: space-around;
-}
 
-.table-section {
-    border-right: 2px solid rgb(0, 0, 0, 0.3);
-    padding-right: 20px;
-}
+/* Header Section*/
 
-.table-section .search-section form {
+.main-container .header {
     display: grid;
     grid-template-columns: repeat(2, auto);
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
 }
 
-.search-section {
-    padding: 50px 5px 50px;
-}
-
-.search-section * {
+.header div {
     display: flex;
     align-items: center;
+    width: 30vw;
 }
 
-.search-box input {
-    width: 250px;
-    border-radius: 5px;
-    padding: 6px 10px 6px;
-    outline: none;
-    border: none;
-    background-color: rgb(209, 209, 209);
+.header .topic {
     font-weight: bold;
-}
-
-.search-button {
-    padding-left: 10px;
-}
-
-.search-button input {
-    cursor: pointer;
-    border-radius: 5px;
-    padding: 6px 20px 6px;
-    border: none;
-    background-color: rgb(203, 62, 14);
-    color: rgb(245, 245, 245);
-}
-
-.data-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 20px;
-}
-
-.data-section table {
-    width: 100%;
-    height: auto;
-    text-align: center;
-}
-
-.data-section table tr,
-th,
-td {
-    padding: 10px;
-    border-radius: 2px;
-    background-color: rgb(167, 163, 163);
-}
-
-.generate-invoice-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 50px 0 10px;
-}
-
-.generate-invoice-section button {
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    background-color: rgb(59, 59, 144);
-    padding: 10px 30px 10px;
-    color: whitesmoke;
-    font-size: 14pt;
-}
-
-.generate-invoice-section button:hover {
-    background-color: rgb(203, 62, 14);
-}
-
-/* Services Section */
-.services-section {
+    font-size: 30pt;
+    color: rgb(190, 54, 8);
     padding-left: 30px;
 }
 
-.services-header {
-    display: grid;
-    grid-template-columns: repeat(2, auto);
-    justify-content: left;
-    align-items: center;
-    padding: 30px 5px 30px;
+.header .add-services-container {
+    justify-content: right;
 }
 
-.services-header .topic h2 {
-    color: rgb(201, 77, 77);
-    padding-right: 25px;
-}
-
-.services-header .add-button i {
+.header .add-services-container button {
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px 5px;
     cursor: pointer;
-    color: rgb(10, 10, 159);
-    font-size: 18pt;
+    background-color: rgb(190, 54, 8);
+    color: white;
 }
 
-.service-cards {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+.header .add-services-container button:hover {
+    background-color: rgb(171, 43, 0);
+}
+
+/* Body Section */
+
+/* Search Section */
+
+.search-section {
+    display: inline-flex;
+    width: 100%;
+    justify-content: center;
     align-items: center;
-    grid-gap: 10px;
-    overflow-y: scroll;
-    height: 50%;
-    padding: 10px;
-    scroll-behavior: smooth;
 }
 
-.service-cards::-webkit-scrollbar {
-    width: 5px;
-    padding: 2px;
+.search-section div {
+    padding: 10px 5px 10px;
 }
 
-.service-cards::-webkit-scrollbar-track {
-    border-radius: 10px;
+.search-section div input {
+    outline: none;
+    border: none;
 }
 
-.service-cards::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
-}
-
-.service-cards div {
+.search-section .search-box input {
     border-radius: 5px;
     padding: 5px 10px 5px;
-    word-wrap: break-word;
-    height: 100px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background-color: rgb(68, 120, 112);
-    border: none;
-    color: whitesmoke;
-    /* font-size: 15pt; */
+    width: 400px;
 }
 
-.bill-history-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px 0 10px;
-}
-
-.bill-history-area input {
-    cursor: pointer;
+.search-section .search-button input {
     border-radius: 5px;
-    border: none;
-    background-color: rgb(59, 59, 144);
-    padding: 10px 30px 10px;
-    color: whitesmoke;
-    font-size: 14pt;
+    padding: 5px 20px 5px;
+    cursor: pointer;
+    background-color: rgb(70, 33, 83, 0.9);
+    color: white;
 }
 
-.bill-history-area input:hover {
-    background-color: rgb(203, 62, 14);
+.search-section .search-button input:hover {
+    background-color: rgb(70, 33, 83);
+}
+
+/* Body Content */
+
+.body-content {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+    padding: 10px;
+}
+
+.body-content div {
+    padding: 10px;
+}
+
+.body-content .table-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-content .table-section table,
+tr,
+th,
+td {
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
 }
