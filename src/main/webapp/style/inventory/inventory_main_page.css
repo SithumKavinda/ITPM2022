@@ -7,7 +7,8 @@
 }
 
 body {
-    background-color: black;
+    background: rgb(164,62,27);
+    background: linear-gradient(90deg, rgba(164,62,27,1) 0%, rgba(209,209,209,1) 52%, rgba(68,120,112,1) 100%);
     padding: 50px;
     overflow: hidden;
     display: flex;
