@@ -136,8 +136,12 @@ td {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color: rgb(68, 120, 112);
+    background-color: #48847b;
     border: none;
     color: whitesmoke;
     font-size: 15pt;
+}
+
+.button_group_section div:hover {
+    background-color: rgb(68, 120, 112);
 }
