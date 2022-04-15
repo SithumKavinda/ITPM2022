@@ -1,1 +1,122 @@
 @charset "ISO-8859-1";
+
+.header_section {
+    padding: 5px 50px 5px;
+}
+
+.header_section h1 {
+    color: rgb(203, 62, 14);
+    font-size: 35pt;
+}
+
+.body_section {
+    display: grid;
+    grid-template-columns: 1fr 500px;
+    justify-content: space-around;
+}
+
+.table_section {
+    border-right: 2px solid rgb(0, 0, 0, 0.3);
+    padding-right: 30px;
+    padding-left: 20px;
+    /*width: 130%;*/
+}
+
+.table_section .search_section form {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    align-items: center;
+}
+
+.search_section {
+    padding: 50px 5px 50px;
+}
+
+.search_section * {
+    display: flex;
+    align-items: center;
+}
+
+.search_box input {
+    width: 250px;
+    border-radius: 5px;
+    padding: 6px 10px 6px;
+    outline: none;
+    border: none;
+    background-color: rgb(209, 209, 209);
+    font-weight: bold;
+}
+
+.search_button {
+    padding-left: 10px;
+}
+
+.search_button input {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 6px 20px 6px;
+    border: none;
+    background-color: rgb(203, 62, 14);
+    color: rgb(245, 245, 245);
+}
+
+.table_data_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0 20px;
+}
+
+.table_data_section table {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.table_data_section table tr,
+th,
+td {
+    padding: 15px;
+    border-radius: 2px;
+    background-color: rgb(167, 163, 163);
+}
+
+/*.button_remove {
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    padding: 2px 10px 2px;
+    color: whitesmoke;
+    font-size: 14pt;
+}*/
+
+.button_group_section {
+    padding-left: 50px;
+}
+
+.button_group {
+    display: grid;
+    grid-template-columns: auto;
+    align-items: center;
+    grid-gap: 10px;
+    height: 50%;
+    padding: 10px;
+}
+
+.button_group div {
+    border-radius: 5px;
+    padding: 5px 10px 5px;
+    word-wrap: break-word;
+    height: 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: rgb(68, 120, 112);
+    border: none;
+    color: whitesmoke;
+    font-size: 15pt;
+}
+
