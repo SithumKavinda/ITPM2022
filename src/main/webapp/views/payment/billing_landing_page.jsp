@@ -22,10 +22,10 @@
 
         <!-- Body Section -->
         <div class="body-section">
-            <form action="searchServlet" method="post">
+            <form action="billing" method="get">
                 <div class="search-section">
                     <div class="search-box">
-                        <input type="text" name="searchText" placeholder="Search Services">
+                        <!-- <input type="text" name="searchText" placeholder="Search Services"> -->
                     </div>
                     <div class="search-button">
                         <input type="submit" name="searchButton" value="Search">

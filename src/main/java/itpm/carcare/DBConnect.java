@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 public class DBConnect {
 	private static String url = "jdbc:mysql://localhost:3306/carcare";
 	private static String username = "root";
-	private static String password = "12345";
+	private static String password = "Apple@2022";
 	private static Connection con;
 	
 	public static Connection getConnection() {
@@ -16,9 +16,14 @@ public class DBConnect {
 			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
 			
+			if(con != null) {
+				System.out.println("Database Connected");
+			}
+			
 		} catch (Exception e) {
 			
-			System.out.println(e.getMessage());
+			System.err.println("DB Connection error");
+			System.err.println(e.getMessage() + "\n");
 			
 		}
 		
