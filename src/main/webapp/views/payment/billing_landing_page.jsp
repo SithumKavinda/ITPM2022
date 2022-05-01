@@ -58,7 +58,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 				</div>
 				<div class="services-section">
 					<%
-					while (!serviceList.isEmpty()) {
+					if (!serviceList.isEmpty()) {
 						for (Service s : serviceList) {
 					%>
 					<div>
@@ -66,7 +66,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 					</div>
 
 					<%
-					}
+						}
 					}
 					%>
 				</div>
