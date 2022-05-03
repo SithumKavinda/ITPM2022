@@ -14,7 +14,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 <title>Services</title>
 <script src="https://kit.fontawesome.com/66bf06966e.js"
 	crossorigin="anonymous"></script>
-<link rel="stylesheet" href="../../style/payment/main.css" />
+<link rel="stylesheet" href="style/payment/main.css" />
 <!-- JavaScript Bundle with Popper -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
@@ -29,12 +29,11 @@ List<Service> serviceList = serviceDAO.getAllServices();
 </head>
 <body>
 	<div class="service-main-container">
-	<p>Watch to do Update and Delete</p>
-		<a href="https://youtu.be/RqiuxA_OFOk">https://youtu.be/RqiuxA_OFOk</a>
+
 		<div class="add-service-button">
-			<button class="btn-danger">
-				<a href="#">Add Service</a>
-			</button>
+			<form action="new" method="post">
+				<input type="submit" value="Add Service">
+			</form>
 		</div>
 		<table class="table table-striped">
 			<thead>

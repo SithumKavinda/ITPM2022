@@ -24,6 +24,7 @@ public class DBConnect {
 			
 			System.err.println("DB Connection error");
 			System.err.println(e.getMessage() + "\n");
+			e.printStackTrace();
 			
 		}
 		

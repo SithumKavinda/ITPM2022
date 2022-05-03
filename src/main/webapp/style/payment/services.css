@@ -57,3 +57,11 @@ body {
 	display: none;
 	position: absolute;
 }
+
+.service-main-container table {
+	height: 65vh;
+}
+
+.service-main-container table tbody {
+	overflow-y: auto;
+}

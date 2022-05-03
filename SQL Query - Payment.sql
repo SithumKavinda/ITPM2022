@@ -1,3 +1,5 @@
+CREATE DATABASE carcare;
+
 -- service table
 CREATE TABLE `carcare`.`service` (
   `service_id` INT NOT NULL AUTO_INCREMENT,
@@ -15,10 +17,10 @@ CREATE TABLE `carcare`.`service` (
 -- INSERT INTO `carcare`.`service` (`service_id`, `service_name`, `discount`, `price`) VALUES ('0', 'as', '4', '3');
 
 -- Update service
--- UPDATE `carcare`.`service` SET `service_name` = 'Tyre & wheels grooming' WHERE (`service_id` = '1');
+-- UPDATE `carcare`.`service` SET `service_name` = ?, `discount` = ?, `price` = ? WHERE (`service_id` = ?);
 
--- Delete service
--- DELETE FROM `carcare`.`service` WHERE (`service_id` = '1');
+-- Delete serviceservice
+-- DELETE FROM `carcare`.`service` WHERE (`service_id` = ?);
 
 -- user table
 CREATE TABLE `carcare`.`user` (
