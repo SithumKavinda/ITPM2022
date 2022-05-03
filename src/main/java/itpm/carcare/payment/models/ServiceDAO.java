@@ -150,4 +150,38 @@ public class ServiceDAO {
 			System.err.println(e.getMessage());
 		}
 	}
+
+	// Search
+	public List<Service> searchService(String serviceName) {
+		List<Service> serviceList = new ArrayList<Service>();
+		String SEARCHQUERY = "SELECT * FROM `carcare`.`service` where service_name LIKE ?;";
+
+		try {
+			con = DBConnect.getConnection();
+			pst = con.prepareStatement(SEARCHQUERY);
+
+			pst.setString(1, serviceName);
+			
+			System.err.println(pst.toString());
+			
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Service service = new Service();
+
+				service.setServiceID(rs.getInt("service_id"));
+				service.setServiceName(rs.getString("service_name"));
+				service.setDiscount(rs.getDouble("discount"));
+				service.setDiscount(rs.getDouble("price"));
+
+				serviceList.add(service);
+			}
+
+			con.close();
+		} catch (Exception e) {
+			System.err.println("There is no Service named " + serviceName);
+		}
+
+		return serviceList;
+	}
 }

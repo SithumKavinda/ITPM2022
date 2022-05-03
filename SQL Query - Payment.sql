@@ -9,7 +9,8 @@ CREATE TABLE `carcare`.`service` (
   PRIMARY KEY (`service_id`));
   
   select * from bill where user_id = 3;
-  
+-- Search
+	SELECT * FROM `carcare`.`service` where service_name LIKE "Exter%";
 -- Retrieve service
 -- SELECT * FROM `carcare`.`service`;
 

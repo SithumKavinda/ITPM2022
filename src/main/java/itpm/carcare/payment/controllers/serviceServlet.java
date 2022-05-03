@@ -1,6 +1,8 @@
 package itpm.carcare.payment.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
@@ -46,6 +48,24 @@ public class serviceServlet extends HttpServlet {
 			} catch (Exception e) {
 				System.err.println(e.getMessage());
 			}
+			break;
+		case "/search":
+			String searchKeyword = request.getParameter("searchText");
+			System.out.println("Search Keyword: "+searchKeyword);
+			
+			List<Service> serviceList = new ArrayList<Service>();
+			
+			serviceList = serviceDAO.searchService(searchKeyword);
+			
+			if(!serviceList.isEmpty()) {
+				for(Service s:serviceList) {
+					System.out.println(s.getServiceName());
+				}
+			}
+			
+			request.setAttribute("SearchResult", serviceList);
+			RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.css");
+			rd.forward(request, response);
 			break;
 		case "/edit":
 
