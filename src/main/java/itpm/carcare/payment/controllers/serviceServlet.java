@@ -49,24 +49,6 @@ public class serviceServlet extends HttpServlet {
 				System.err.println(e.getMessage());
 			}
 			break;
-		case "/search":
-			String searchKeyword = request.getParameter("searchText");
-			System.out.println("Search Keyword: "+searchKeyword);
-			
-			List<Service> serviceList = new ArrayList<Service>();
-			
-			serviceList = serviceDAO.searchService(searchKeyword);
-			
-			if(!serviceList.isEmpty()) {
-				for(Service s:serviceList) {
-					System.out.println(s.getServiceName());
-				}
-			}
-			
-			request.setAttribute("SearchResult", serviceList);
-			RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.css");
-			rd.forward(request, response);
-			break;
 		case "/edit":
 
 			break;
@@ -75,6 +57,10 @@ public class serviceServlet extends HttpServlet {
 			break;
 		case "/delete":
 
+			break;
+		case "/toBill":
+			System.out.print("\nGot the ADD to Bill Request\n");
+			addTobill(request, response);
 			break;
 		default:
 			break;
@@ -108,6 +94,21 @@ public class serviceServlet extends HttpServlet {
 		response.sendRedirect("service.jsp");
 
 		serviceDAO.addService(service);
+	}
+
+	// Insert service to the bill
+	private void addTobill(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Test
+		System.err.print("Selected ID by user: ");
+		System.out.println(request.getParameter("service-id") + "\n");
+
+		// serviceDAO.getServiceByID(Integer.parseInt(request.getParameter("service-id")));
+
+		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("billing_landing_page.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

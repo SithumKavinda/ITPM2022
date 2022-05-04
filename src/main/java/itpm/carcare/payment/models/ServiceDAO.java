@@ -151,37 +151,76 @@ public class ServiceDAO {
 		}
 	}
 
-	// Search
-	public List<Service> searchService(String serviceName) {
-		List<Service> serviceList = new ArrayList<Service>();
-		String SEARCHQUERY = "SELECT * FROM `carcare`.`service` where service_name LIKE ?;";
+	// Add bill item
+	public void addToBill(int id) {
+		// Test
+		System.out.println("\nAdd To Bill Fucntion called");
+
+		// Queries
+		String SELECTQUERY = "SELECT * FROM `carcare`.`service` where service_id=?;";
+		String INSERTQUERY = "INSERT INTO `carcare`.`bill` (`service_id`, `service_name`, `discount`, `price`) VALUES (?,?,?,?);";
+
+		Service service = new Service();
+
+		boolean result = false;
 
 		try {
 			con = DBConnect.getConnection();
-			pst = con.prepareStatement(SEARCHQUERY);
+			// Getting service by ID
+			System.out.println("\nGetting service by ID");
+			pst = con.prepareStatement(SELECTQUERY);
 
-			pst.setString(1, serviceName);
-			
-			System.err.println(pst.toString());
-			
+			pst.setInt(1, id);
+
+			// Test case
+			System.err.print("SQL Statement: ");
+			System.out.println(pst.toString());
+
 			rs = pst.executeQuery();
 
-			while (rs.next()) {
-				Service service = new Service();
+			// Test
+			System.err.print("ResultSet Status: ");
+			System.out.println(rs.toString());
 
-				service.setServiceID(rs.getInt("service_id"));
-				service.setServiceName(rs.getString("service_name"));
-				service.setDiscount(rs.getDouble("discount"));
-				service.setDiscount(rs.getDouble("price"));
+			rs.next();
 
-				serviceList.add(service);
+			service.setServiceID(rs.getInt("service_id"));
+			service.setServiceName(rs.getString("service_name"));
+			service.setDiscount(rs.getDouble("discount"));
+			service.setPrice(rs.getDouble("price"));
+
+			// Test
+			System.err.print("\nResultset Results: ");
+			System.out.println(service.getServiceID() + " " + service.getServiceName() + " " + service.getDiscount()
+					+ " " + service.getPrice());
+
+			// Insert into DB
+			System.out.println("Inserting Data into Database");
+
+			pst = con.prepareStatement(INSERTQUERY);
+
+			pst.setInt(1, service.getServiceID());
+			pst.setString(2, service.getServiceName());
+			pst.setDouble(3, service.getDiscount());
+			pst.setDouble(4, service.getPrice());
+
+			System.err.print("Insert Query: ");
+			System.out.println(pst.toString() + "\n");
+
+			result = pst.execute();
+
+			// Test
+			System.err.print("Query Execution: ");
+
+			if (result) {
+				System.out.println("Success");
+			} else {
+				System.out.println("Failed");
 			}
 
-			con.close();
 		} catch (Exception e) {
-			System.err.println("There is no Service named " + serviceName);
+			System.err.println(e.getMessage());
 		}
-
-		return serviceList;
 	}
+
 }

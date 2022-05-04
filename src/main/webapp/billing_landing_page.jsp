@@ -1,4 +1,5 @@
 
+<%@page import="itpm.carcare.payment.models.billDAO"%>
 <%@ page import="itpm.carcare.payment.models.Service"%>
 <%@ page import="java.util.List"%>
 <%@ page import="itpm.carcare.payment.models.ServiceDAO"%>
@@ -6,6 +7,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 ServiceDAO serviceDAO = new ServiceDAO();
+billDAO billDAO = new billDAO();
+
+List<Service> billList = billDAO.getBillList();
 List<Service> serviceList = serviceDAO.getAllServices();
 %>
 
@@ -17,7 +21,8 @@ List<Service> serviceList = serviceDAO.getAllServices();
 <meta charset="ISO-8859-1" />
 <title>Billing</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/billing_landing_page.css" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/billing_landing_page.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -50,7 +55,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th scope="col">Service ID</th>
+							<th scope="col">#</th>
 							<th scope="col">Service Name</th>
 							<th scope="col">Discount</th>
 							<th scope="col">Price</th>
@@ -58,19 +63,32 @@ List<Service> serviceList = serviceDAO.getAllServices();
 						</tr>
 					</thead>
 					<tbody>
+						<%
+						if (!billList.isEmpty()) {
+							for (Service s : billList) {
+								double total = 0;
+								total += s.getPrice();
+						%>
+
 						<tr>
-							<td align="center">1</td>
-							<td>Tyre & wheels grooming</td>
-							<td align="center">10.00</td>
-							<td align="center">3000.00</td>
+							<th align="center"><%=s.getServiceID()%></th>
+							<td align="center"><%=s.getServiceName()%></td>
+							<td align="center"><%=s.getDiscount()%></td>
+							<td align="center"><%=s.getPrice()%></td>
 							<td align="center">
 								<button name="" id="btn_rm" onclick="">Remove</button>
 							</td>
 						</tr>
 
+						<%
+						}
+						}
+						%>
+
+
 						<tr>
 							<th align="center" colspan="4">TOTAL</th>
-							<th align="center">3000.00</th>
+							<th align="center"></th>
 						</tr>
 					</tbody>
 				</table>
@@ -90,12 +108,22 @@ List<Service> serviceList = serviceDAO.getAllServices();
 					</navbar>
 				</div>
 				<div class="service-list">
-					<% if (!serviceList.isEmpty()) { for (Service s : serviceList) { %>
-					<button name="<%=s.getServiceID()%>">
-						<%=s.getServiceName() %>
-					</button>
-					<% } } %>
-					
+					<%
+					if (!serviceList.isEmpty()) {
+						for (Service s : serviceList) {
+					%>
+					<form action="toBill" method="post">
+						<button type="submit">
+							<%=s.getServiceName()%>
+						</button>
+						<input type="text" name="service-id" value="<%=s.getServiceID()%>"
+							readonly="readonly" style="display: none;">
+					</form>
+					<%
+					}
+					}
+					%>
+
 				</div>
 			</div>
 		</div>
