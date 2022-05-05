@@ -1,0 +1,67 @@
+@charset "ISO-8859-1";
+
+* {
+	transition: 0.3s;
+	/*border: 1px solid black;*/
+	overflow: hidden;
+	font-size: 14pt;
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+	width: 5px;
+	padding: 2px;
+}
+
+::-webkit-scrollbar-track {
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, 0.6);
+	border-radius: 10px;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+.service-main-container .add-service-button a {
+	text-decoration: none;
+	width: auto;
+	height: auto;
+	color: white;
+}
+
+.service-main-container .add-service-button {
+	padding-bottom: 50px;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+}
+
+.service-main-container {
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 15px;
+	box-shadow: 1px 1px 50px rgb(0, 0, 0, 0.7);
+	padding: 20px;
+	height: 90vh;
+	width: 90vw;
+	max-height: 90vh;
+}
+
+.add-service-container {
+	display: none;
+	position: absolute;
+}
+
+.service-main-container table {
+	height: 65vh;
+}
+
+.service-main-container table tbody {
+	overflow-y: auto;
+}

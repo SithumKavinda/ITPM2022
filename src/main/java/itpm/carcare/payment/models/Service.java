@@ -1,37 +1,29 @@
 package itpm.carcare.payment.models;
 
-public class bill {
-	
-	private int billNo;
+public class Service {
+	private int serviceID;
 	private String serviceName;
 	private double discount;
 	private double price;
-	
-	public bill() {
+
+	public Service() {
 		super();
 	}
-	
-	public bill(int billNo, String serviceName, double discount, double price) {
+
+	public Service(int serviceID, String serviceName, double discount, double price) {
 		super();
-		this.billNo = billNo;
+		this.serviceID = serviceID;
 		this.serviceName = serviceName;
 		this.discount = discount;
 		this.price = price;
 	}
 
-	public bill(String serviceName, double discount, double price) {
-		super();
-		this.serviceName = serviceName;
-		this.discount = discount;
-		this.price = price;
+	public int getServiceID() {
+		return serviceID;
 	}
 
-	public int getBillNo() {
-		return billNo;
-	}
-
-	public void setBillNo(int billNo) {
-		this.billNo = billNo;
+	public void setServiceID(int serviceID) {
+		this.serviceID = serviceID;
 	}
 
 	public String getServiceName() {
@@ -57,7 +49,5 @@ public class bill {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	
-		
-	
+
 }
