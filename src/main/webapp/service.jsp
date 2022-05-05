@@ -70,23 +70,5 @@ List<Service> serviceList = serviceDAO.getAllServices();
 			</tbody>
 		</table>
 	</div>
-
-	<div class="add-service-container">
-		<div class="service-header">Add Service</div>
-		<form action="#" method="post">
-			<div class="service-name-area">
-				<input type="text" name="service-name" placeholder="Service Name" />
-			</div>
-			<div class="discount-area">
-				<input type="text" name="discount" placeholder="Discount" />
-			</div>
-			<div class="price-area">
-				<input type="text" name="price" placeholder="Price" />
-			</div>
-			<div class="submit-button-area">
-				<input type="submit" value="Save" />
-			</div>
-		</form>
-	</div>
 </body>
 </html>
