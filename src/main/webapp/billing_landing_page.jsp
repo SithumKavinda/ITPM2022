@@ -92,7 +92,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 
 						<tr>
 							<th align="center" colspan="4">TOTAL</th>
-							<th align="center"></th>
+							<th align="center"><%=billDAO.getBillTotal()%></th>
 						</tr>
 					</tbody>
 				</table>

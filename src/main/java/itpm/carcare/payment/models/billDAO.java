@@ -68,7 +68,7 @@ public class billDAO {
 	// Delete bill item
 	public void deleteBillItem(int id) {
 		// log
-		System.out.println("Bill item deleting...");
+		System.out.println("/nBill item deleting...");
 
 		String DELETEBILLITEMSQL = "DELETE FROM `carcare`.`bill` WHERE service_id=?;";
 
@@ -79,10 +79,54 @@ public class billDAO {
 			pst.setInt(1, id);
 			// log-SQL statement
 			System.out.println(pst.toString());
-			
+
 			pst.execute();
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	// Bill Total
+	public double getBillTotal() {
+		// log
+		System.out.println("/nCalculating bill total");
+		double total = 0;
+
+		List<Service> serviceList = getBillList();
+
+		if (!serviceList.isEmpty()) {
+			for (Service service : serviceList) {
+				total += service.getPrice();
+				// log
+				System.out.println("Total price: " + total);
+			}
+		}
+
+		return total;
+	}
+
+	// Clear bill table data
+	public void clearTable() {
+		// log-Start
+		System.out.println("\nClearing Bill Table");
+
+		String CLEARTABLEQUERY = "TRUNCATE TABLE `carcare`.`bill`;";
+
+		try {
+
+			con = DBConnect.getConnection();
+			pst = con.prepareStatement(CLEARTABLEQUERY);
+
+			// log-Query
+			System.out.println("Query " + pst.toString());
+
+			pst.execute();
+
+			con.close();
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
 	}
 }
