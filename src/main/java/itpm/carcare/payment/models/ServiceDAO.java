@@ -223,4 +223,36 @@ public class ServiceDAO {
 		}
 	}
 
+	// Search service
+	public List<Service> searchService(String searchQuery) {
+		// log
+		System.out.println("\nSearching services...");
+
+		List<Service> searchedServices = new ArrayList<Service>();
+		String SEARCHQUERY = "SELECT * FROM `carcare`.`service` where service_name=?";
+
+		try {
+
+			con = DBConnect.getConnection();
+
+			pst = con.prepareStatement(SEARCHQUERY);
+			pst.setString(1, searchQuery);
+
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"),
+						rs.getDouble("discount"), rs.getDouble("price"));
+				// log
+				System.out.println(service.getServiceName());
+
+				searchedServices.add(service);
+			}
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+		return searchedServices;
+	}
 }

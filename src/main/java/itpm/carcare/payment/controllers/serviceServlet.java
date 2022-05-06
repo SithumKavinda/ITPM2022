@@ -42,6 +42,13 @@ public class serviceServlet extends HttpServlet {
 			System.err.println("Servlet Activated");
 			break;
 
+		// Search service
+		case "/searchService":
+			System.out.println("\n=========================");
+			System.out.println("Servlet: searchService called");
+			serviceDAO.searchService(request.getParameter("searchText"));
+			break;
+
 		// Insert bill item to the DB
 		case "/toBill":
 			System.out.println("\n=========================");
@@ -93,7 +100,7 @@ public class serviceServlet extends HttpServlet {
 		billDAO.deleteBillItem(id);
 		// log
 		System.out.println("Redirecting to Landing page");
-		
+
 		response.sendRedirect("billing_landing_page.jsp");
 	}
 

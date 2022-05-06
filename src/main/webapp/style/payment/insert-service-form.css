@@ -1,0 +1,153 @@
+@charset "ISO-8859-1";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  transition: 0.3s;
+  /* border: 1px solid black; */
+  overflow: hidden;
+  font-size: 14pt;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+}
+
+body {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  padding: 10px;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(118, 45, 20);
+  background: linear-gradient(90deg, rgb(118, 45, 20) 0%, rgb(56, 98, 92) 100%);
+}
+
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 5px;
+  padding: 2px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+#center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btn {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(255, 115, 0, 0.7);
+  padding: 5px 20px 5px;
+}
+
+/* Button Styles */
+#btn-nav {
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(56, 98, 92, 0.7);
+  color: whitesmoke;
+  padding: 5px 20px 5px;
+}
+
+#btn_rm {
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(234, 99, 78, 0.7);
+  color: whitesmoke;
+  padding: 5px 10px 5px;
+  font-size: 10pt;
+}
+
+#btn_rm:hover {
+  background-color: rgba(234, 99, 78);
+}
+
+#btn-nav:hover {
+  background-color: rgb(56, 98, 92);
+}
+
+#btn:hover {
+  background-color: rgb(255, 115, 0);
+}
+
+.service-main-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  box-shadow: 1px 1px 50px rgb(0, 0, 0, 0.7);
+  padding: 40px 30px 40px;
+  height: auto;
+  width: auto;
+  max-height: 90vh;
+}
+
+.service-main-container .form-body {
+  height: 100%;
+}
+
+.service-main-container .form-header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.service-main-container .form-header h1 {
+  font-size: 30pt;
+
+  word-wrap: break-word;
+}
+
+.service-main-container .form-body div {
+  padding: 20px 0 20px;
+}
+
+#text-input {
+  border: none;
+  border-radius: 5px;
+  padding: 15px 15px 15px;
+  width: 30vw;
+}
+
+/* Back button */
+.back-button {
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 70px;
+  left: 60px;
+}
+
+.back-button form {
+  padding: 0;
+}
+
+.back-button button {
+  border: none;
+  padding: 0;
+  background-color: rgba(219, 173, 21, 0);
+}
+
+.back-button i {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 30pt;
+  padding: 1px;
+}

@@ -103,7 +103,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 				<!-- Search Bar -->
 				<div class="search-bar">
 					<navbar id="search-bar" class="navbar navbar-light bg-opacity-100">
-					<form class="form-inline" method="get" action="search">
+					<form class="form-inline" method="get" action="searchService">
 						<input class="form-control-sm" type="search"
 							placeholder="Search Service" name="searchText" />
 						<button id="btn-nav" class="btn btn-group-sm" type="submit">
