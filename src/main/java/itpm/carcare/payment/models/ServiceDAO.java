@@ -132,7 +132,7 @@ public class ServiceDAO {
 	}
 
 	// Delete
-	public void deleteService(Service service) {
+	public void deleteService(int service_id) {
 		// log
 		System.out.println("\ndeleteService() => Deleting Service...");
 
@@ -143,7 +143,7 @@ public class ServiceDAO {
 
 			pst = con.prepareStatement(DELETEQUERY);
 
-			pst.setInt(1, service.getServiceID());
+			pst.setInt(1, service_id);
 
 			// log
 			System.out.println("SQL Query: " + pst.toString());

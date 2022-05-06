@@ -105,28 +105,31 @@ public class serviceServlet extends HttpServlet {
 
 			getServiceDetails(request, response);
 			break;
-		case "/edit":
-			// log
-			System.out.println("\n=========================");
-			System.out.println("Servlet: edit called");
-
-			break;
-		case "/update":
-			// log
-			System.out.println("\n=========================");
-			System.out.println("Servlet: update called");
-
-			break;
-		case "/delete":
+		case "/deleteService":
 			// log
 			System.out.println("\n=========================");
 			System.out.println("Servlet: delete called");
 
+			deleteService(request, response);
 			break;
 
 		default:
 			break;
 		}
+	}
+
+	// Delete service
+	private void deleteService(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		int service_id = Integer.parseInt(request.getParameter("service-ID-service-jsp"));
+
+		// log
+		System.out.println("Service ID: " + service_id);
+		serviceDAO.deleteService(service_id);
+		
+		//log
+		System.out.println("Proceeding to service.jsp");
+		proceedServices(request, response);
 	}
 
 	// Proceed user to Services page
