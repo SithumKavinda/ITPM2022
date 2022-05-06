@@ -49,6 +49,13 @@ public class serviceServlet extends HttpServlet {
 			serviceDAO.searchService(request.getParameter("searchText"));
 			break;
 
+		// back to Landing page
+		case "/home":
+			System.out.println("\n=========================");
+			System.out.print("Servlet: home called");
+			proceedHome(request, response);
+			break;
+
 		// Insert bill item to the DB
 		case "/toBill":
 			System.out.println("\n=========================");
@@ -89,6 +96,12 @@ public class serviceServlet extends HttpServlet {
 		default:
 			break;
 		}
+	}
+
+	// Proceed user to landing page
+	private void proceedHome(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		response.sendRedirect("billing_landing_page.jsp");
 	}
 
 	// Delete bill item from the DB
