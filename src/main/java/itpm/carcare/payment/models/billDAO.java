@@ -11,12 +11,12 @@ import itpm.carcare.DBConnect;
 public class billDAO {
 	private Connection con;
 	private PreparedStatement pst;
-	private ResultSet rs;
+	private ResultSet rs = null;
 
 	// Retrieve bill item list
 	public List<Service> getBillList() {
 		// log
-		System.out.println("/nBill loading in the table has started");
+		System.out.println("\ngetBillList() => Bill loading in the table has started");
 
 		List<Service> billList = new ArrayList<Service>();
 		String READBILLSQL = "SELECT * FROM carcare.bill;";
@@ -27,7 +27,7 @@ public class billDAO {
 
 			pst = con.prepareStatement(READBILLSQL);
 			// log
-			System.out.println(pst.toString());
+			System.out.println("SQL Query" + pst.toString());
 
 			rs = pst.executeQuery();
 
@@ -49,17 +49,19 @@ public class billDAO {
 				service.setPrice(rs.getDouble("price"));
 
 				billList.add(service);
-				// bill
-				System.out.print("Bill list status: ");
-				if (!billList.isEmpty()) {
-					System.out.println("Sucess");
-				} else {
-					System.err.println("Fail");
-				}
 			}
 
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+		}
+
+		// log
+		// bill
+		System.out.print("Bill list status: ");
+		if (!billList.isEmpty()) {
+			System.out.println("Sucess");
+		} else {
+			System.err.println("Fail");
 		}
 
 		return billList;
@@ -89,7 +91,7 @@ public class billDAO {
 	// Bill Total
 	public double getBillTotal() {
 		// log
-		System.out.println("/nCalculating bill total");
+		System.out.println("\ngetBillTotal() => Calculating bill total");
 		double total = 0;
 
 		List<Service> serviceList = getBillList();
@@ -97,10 +99,11 @@ public class billDAO {
 		if (!serviceList.isEmpty()) {
 			for (Service service : serviceList) {
 				total += service.getPrice();
-				// log
-				System.out.println("Total price: " + total);
 			}
 		}
+
+		// log
+		System.out.println("Total price: " + total);
 
 		return total;
 	}

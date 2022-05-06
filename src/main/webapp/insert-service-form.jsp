@@ -27,7 +27,7 @@ pageEncoding="ISO-8859-1"%>
   </head>
   <body>
     <div class="back-button">
-      <form action="#" method="post">
+      <form action="backToServices" method="post">
         <button type="submit">
           <i class="fa-solid fa-circle-chevron-left"></i>
         </button>

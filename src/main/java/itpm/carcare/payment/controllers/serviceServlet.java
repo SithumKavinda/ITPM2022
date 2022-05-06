@@ -36,60 +36,91 @@ public class serviceServlet extends HttpServlet {
 		switch (action) {
 		// Open service.jsp [Service List page]
 		case "/services":
+			// log
 			System.out.println("\n=========================");
 			System.out.println("Servlet: services called");
-			navigateToServices(request, response);
-			System.err.println("Servlet Activated");
+
+			proceedServices(request, response);
 			break;
 
 		// Search service
 		case "/searchService":
+			// log
 			System.out.println("\n=========================");
 			System.out.println("Servlet: searchService called");
+
 			serviceDAO.searchService(request.getParameter("searchText"));
 			break;
 
 		// back to Landing page
 		case "/home":
+			// log
 			System.out.println("\n=========================");
-			System.out.print("Servlet: home called");
+			System.out.println("Servlet: home called");
+
 			proceedHome(request, response);
+			break;
+
+		// back to Services page
+		case "/backToServices":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: backToServices called");
+
+			proceedServices(request, response);
 			break;
 
 		// Insert bill item to the DB
 		case "/toBill":
+			// log
 			System.out.println("\n=========================");
-			System.out.print("Servlet: toBill called");
+			System.out.println("Servlet: toBill called");
+
 			addTobill(request, response);
 			break;
 
 		// Delete bill item from the DB
 		case "/deleteBillItem":
+			// log
 			System.out.println("\n=========================");
-			System.out.print("Servlet: deleteBillItem called");
+			System.out.println("Servlet: deleteBillItem called");
+
 			deleteBillItem(request, response);
 			break;
 
 		// Open insert-service-form.jsp [Insert services form]
 		case "/new":
+			// log
 			System.out.println("\n=========================");
-			System.out.print("Servlet: new called");
+			System.out.println("Servlet: new called");
+
 			showInsertPage(request, response);
 			break;
 
 		// Insert new service to the DB
 		case "/insert":
+			// log
 			System.out.println("\n=========================");
-			System.out.print("Servlet: insert called");
+			System.out.println("Servlet: insert called");
+
 			getServiceDetails(request, response);
 			break;
 		case "/edit":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: edit called");
 
 			break;
 		case "/update":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: update called");
 
 			break;
 		case "/delete":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: delete called");
 
 			break;
 
@@ -98,10 +129,30 @@ public class serviceServlet extends HttpServlet {
 		}
 	}
 
+	// Proceed user to Services page
+	private void proceedServices(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		// log
+		System.out.println("Proceeding to service.jsp");
+
+		response.sendRedirect("service.jsp");
+	}
+
 	// Proceed user to landing page
 	private void proceedHome(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
+		// log
+		System.out.println("Proceeding to billing_landing_page.jsp");
+
 		response.sendRedirect("billing_landing_page.jsp");
+	}
+
+	// Proceed user to the insert services form
+	private void showInsertPage(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// log
+		System.out.println("Proceeding to insert-service-form.jsp");
+		response.sendRedirect("insert-service-form.jsp");
 	}
 
 	// Delete bill item from the DB
@@ -110,23 +161,12 @@ public class serviceServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("bill-item-id"));
 		// log-User selected bill item id
 		System.out.println("Selected bill item ID: " + id);
+
 		billDAO.deleteBillItem(id);
 		// log
 		System.out.println("Redirecting to Landing page");
 
 		response.sendRedirect("billing_landing_page.jsp");
-	}
-
-	// Navigate user to the services page
-	private void navigateToServices(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		response.sendRedirect("service.jsp");
-	}
-
-	// Navigate user to the insert services form
-	private void showInsertPage(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		response.sendRedirect("insert-service-form.jsp");
 	}
 
 	// Insert service from insert service form to Database
@@ -148,7 +188,7 @@ public class serviceServlet extends HttpServlet {
 	private void addTobill(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// Test
-		System.err.print("Selected ID by user: ");
+		System.out.print("Selected ID by user: ");
 		System.out.println(request.getParameter("service-id") + "\n");
 
 		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));

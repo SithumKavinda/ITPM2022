@@ -8,27 +8,29 @@ public class DBConnect {
 	private static String username = "root";
 	private static String password = "Apple@2022";
 	private static Connection con;
-	
+
 	public static Connection getConnection() {
-		
+		//log
+		System.out.println("\ngetConnection() => Database Connection called");
 		try {
-			
+
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			con = DriverManager.getConnection(url, username, password);
-			
-			if(con != null) {
-				System.out.println("Database Connected");
+
+			// log
+			if (con != null) {
+				System.out.println("Connection Status:" + "Connected\n");
 			}
-			
+
 		} catch (Exception e) {
-			
-			System.err.println("DB Connection error");
+
+			System.err.println("Connection Status:" + "Disconnected");
 			System.err.println(e.getMessage() + "\n");
 			e.printStackTrace();
-			
+
 		}
-		
+
 		return con;
-		
+
 	}
 }

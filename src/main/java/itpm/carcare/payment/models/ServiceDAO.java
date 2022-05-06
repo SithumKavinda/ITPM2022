@@ -16,6 +16,8 @@ public class ServiceDAO {
 
 	// Retrieve
 	public List<Service> getAllServices() {
+		// log
+		System.out.println("\ngetAllServices() => Getting all Services...");
 
 		List<Service> serviceList = new ArrayList<Service>();
 		String RETRIEVE_SERVICE = "SELECT * FROM `carcare`.`service`;";
@@ -25,14 +27,18 @@ public class ServiceDAO {
 			con = DBConnect.getConnection();
 
 			pst = con.prepareStatement(RETRIEVE_SERVICE);
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
 			rs = pst.executeQuery();
 
-			// Resultset validation
+			// log
+			System.out.print("ResultSet Status: ");
+
 			if (rs != null) {
-				System.out.println("Services Retrieved");
+				System.out.println("ResultSet initiated with data");
 			} else {
-				System.err.println("Services Retrieving Failed!");
+				System.err.println("ResultSet not initiated");
 			}
 
 			// Input ResultSet into ArrayList
@@ -43,7 +49,7 @@ public class ServiceDAO {
 				service.setServiceID(rs.getInt("service_id"));
 				service.setServiceName(rs.getString("service_name"));
 				service.setDiscount(rs.getDouble("discount"));
-				service.setDiscount(rs.getDouble("price"));
+				service.setPrice(rs.getDouble("price"));
 
 				// Add service object to ArrayList
 				serviceList.add(service);
@@ -52,8 +58,8 @@ public class ServiceDAO {
 			con.close();
 
 		} catch (Exception e) {
-
-			System.err.println("Retrieving Services failed!");
+			System.out.print("getAllServices() => ");
+			System.err.println("Retrieving Services failed");
 			System.err.println(e.getMessage());
 
 		}
@@ -63,8 +69,10 @@ public class ServiceDAO {
 
 	// Insert
 	public void addService(Service service) {
+		// log
+		System.out.println("\naddService() => Adding Service...");
+
 		String INSERTQUERY = "INSERT INTO `carcare`.`service` (`service_id`, `service_name`, `discount`, `price`) VALUES (0, ?, ?, ?);";
-		boolean result = false;
 
 		try {
 
@@ -77,27 +85,27 @@ public class ServiceDAO {
 			pst.setDouble(2, service.getDiscount());
 			pst.setDouble(3, service.getPrice());
 
-			// Execute query
-			result = pst.execute();
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
-			if (result) {
-				System.out.println("Insert Successfull");
-			} else {
-				System.err.println("Inserting Failed");
-			}
+			// Execute query
+			pst.execute();
 
 			con.close();
 
 		} catch (Exception e) {
-			System.err.println("Inserting Service failed!");
+			System.out.print("addService() => ");
+			System.err.println("Inserting Service failed");
 			System.err.println(e.getMessage());
 		}
 	}
 
 	// Update
 	public void editService(Service service) {
+		// log
+		System.out.println("\neditService() => Editing Service...");
+
 		String UPDATEQUERY = "UPDATE `carcare`.`service` SET `service_name` = ?, `discount` = ?, `price` = ? WHERE (`service_id` = ?);";
-		boolean result = false;
 
 		try {
 			con = DBConnect.getConnection();
@@ -109,25 +117,26 @@ public class ServiceDAO {
 			pst.setDouble(3, service.getPrice());
 			pst.setInt(4, service.getServiceID());
 
-			result = pst.execute();
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
-			if (result) {
-				System.out.println("Update Successful");
-			} else {
-				System.err.println("Update failed");
-			}
+			pst.execute();
 
 			con.close();
+
 		} catch (Exception e) {
-			System.err.println("Updating Service failed!");
+			System.out.print("editService() => ");
+			System.err.println("Updating Service failed");
 			System.err.println(e.getMessage());
 		}
 	}
 
 	// Delete
 	public void deleteService(Service service) {
+		// log
+		System.out.println("\ndeleteService() => Deleting Service...");
+
 		String DELETEQUERY = "DELETE FROM `carcare`.`service` WHERE (`service_id` = ?);";
-		boolean result = false;
 
 		try {
 			con = DBConnect.getConnection();
@@ -136,25 +145,24 @@ public class ServiceDAO {
 
 			pst.setInt(1, service.getServiceID());
 
-			result = pst.execute();
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
-			if (result) {
-				System.out.println("Delete Successful");
-			} else {
-				System.err.println("Delete Failed");
-			}
+			pst.execute();
 
 			con.close();
+
 		} catch (Exception e) {
-			System.err.println("Deleting Service failed!");
+			System.out.print("deleteService() => ");
+			System.err.println("Deleting Service failed");
 			System.err.println(e.getMessage());
 		}
 	}
 
 	// Add bill item
 	public void addToBill(int id) {
-		// Test
-		System.out.println("\nAdd To Bill Fucntion called");
+		// log
+		System.out.println("\naddToBill() => Adding to Bill...");
 
 		// Queries
 		String SELECTQUERY = "SELECT * FROM `carcare`.`service` where service_id=?;";
@@ -162,25 +170,21 @@ public class ServiceDAO {
 
 		Service service = new Service();
 
-		boolean result = false;
-
 		try {
 			con = DBConnect.getConnection();
-			// Getting service by ID
-			System.out.println("\nGetting service by ID");
+			// log
+			System.out.println("Getting service by ID...");
 			pst = con.prepareStatement(SELECTQUERY);
 
 			pst.setInt(1, id);
 
-			// Test case
-			System.err.print("SQL Statement: ");
-			System.out.println(pst.toString());
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
 			rs = pst.executeQuery();
 
-			// Test
-			System.err.print("ResultSet Status: ");
-			System.out.println(rs.toString());
+			// log
+			System.out.println("ResultSet Status: " + rs.toString());
 
 			rs.next();
 
@@ -189,13 +193,12 @@ public class ServiceDAO {
 			service.setDiscount(rs.getDouble("discount"));
 			service.setPrice(rs.getDouble("price"));
 
-			// Test
-			System.err.print("\nResultset Results: ");
-			System.out.println(service.getServiceID() + " " + service.getServiceName() + " " + service.getDiscount()
-					+ " " + service.getPrice());
+			// log
+			System.out.println("\nResultset Results: " + service.getServiceID() + " " + service.getServiceName() + " "
+					+ service.getDiscount() + " " + service.getPrice());
 
 			// Insert into DB
-			System.out.println("Inserting Data into Database");
+			System.out.println("\nInserting Data into Database...");
 
 			pst = con.prepareStatement(INSERTQUERY);
 
@@ -204,21 +207,16 @@ public class ServiceDAO {
 			pst.setDouble(3, service.getDiscount());
 			pst.setDouble(4, service.getPrice());
 
-			System.err.print("Insert Query: ");
-			System.out.println(pst.toString() + "\n");
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
-			result = pst.execute();
+			pst.execute();
 
-			// Test
-			System.err.print("Query Execution: ");
-
-			if (result) {
-				System.out.println("Success");
-			} else {
-				System.out.println("Failed");
-			}
+			con.close();
 
 		} catch (Exception e) {
+			System.out.print("addToBill() => ");
+			System.err.println("Adding to Bill is Failed");
 			System.err.println(e.getMessage());
 		}
 	}
@@ -226,7 +224,7 @@ public class ServiceDAO {
 	// Search service
 	public List<Service> searchService(String searchQuery) {
 		// log
-		System.out.println("\nSearching services...");
+		System.out.println("\nsearchService() => Searching services...");
 
 		List<Service> searchedServices = new ArrayList<Service>();
 		String SEARCHQUERY = "SELECT * FROM `carcare`.`service` where service_name=?";
@@ -237,6 +235,9 @@ public class ServiceDAO {
 
 			pst = con.prepareStatement(SEARCHQUERY);
 			pst.setString(1, searchQuery);
+
+			// log
+			System.out.println("SQL Query: " + pst.toString());
 
 			rs = pst.executeQuery();
 
@@ -250,6 +251,7 @@ public class ServiceDAO {
 			}
 
 		} catch (Exception e) {
+			System.out.println("searchService() => ");
 			System.err.println(e.getMessage());
 		}
 
