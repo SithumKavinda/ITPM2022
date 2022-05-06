@@ -13,6 +13,7 @@ public class billDAO {
 	private PreparedStatement pst;
 	private ResultSet rs;
 
+	// Retrieve bill item list
 	public List<Service> getBillList() {
 		// log
 		System.out.println("/nBill loading in the table has started");
@@ -41,16 +42,16 @@ public class billDAO {
 			// Enter data to the ArrayList
 			while (rs.next()) {
 				Service service = new Service();
-				
+
 				service.setServiceID(rs.getInt("service_id"));
 				service.setServiceName(rs.getString("service_name"));
 				service.setDiscount(rs.getDouble("discount"));
 				service.setPrice(rs.getDouble("price"));
-				
+
 				billList.add(service);
 				// bill
 				System.out.print("Bill list status: ");
-				if(!billList.isEmpty()) {
+				if (!billList.isEmpty()) {
 					System.out.println("Sucess");
 				} else {
 					System.err.println("Fail");
@@ -62,5 +63,26 @@ public class billDAO {
 		}
 
 		return billList;
+	}
+
+	// Delete bill item
+	public void deleteBillItem(int id) {
+		// log
+		System.out.println("Bill item deleting...");
+
+		String DELETEBILLITEMSQL = "DELETE FROM `carcare`.`bill` WHERE service_id=?;";
+
+		try {
+			con = DBConnect.getConnection();
+
+			pst = con.prepareStatement(DELETEBILLITEMSQL);
+			pst.setInt(1, id);
+			// log-SQL statement
+			System.out.println(pst.toString());
+			
+			pst.execute();
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 }

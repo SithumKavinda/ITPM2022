@@ -1,12 +1,9 @@
 package itpm.carcare.payment.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
-import jakarta.servlet.RequestDispatcher;
+import itpm.carcare.payment.models.billDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,9 +15,11 @@ public class serviceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ServiceDAO serviceDAO;
+	private billDAO billDAO;
 
 	public serviceServlet() {
 		serviceDAO = new ServiceDAO();
+		billDAO = new billDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,19 +34,40 @@ public class serviceServlet extends HttpServlet {
 		String action = request.getServletPath();
 
 		switch (action) {
+		// Open service.jsp [Service List page]
 		case "/services":
+			System.out.println("\n=========================");
+			System.out.println("Servlet: services called");
 			navigateToServices(request, response);
 			System.err.println("Servlet Activated");
 			break;
+
+		// Insert bill item to the DB
+		case "/toBill":
+			System.out.println("\n=========================");
+			System.out.print("Servlet: toBill called");
+			addTobill(request, response);
+			break;
+
+		// Delete bill item from the DB
+		case "/deleteBillItem":
+			System.out.println("\n=========================");
+			System.out.print("Servlet: deleteBillItem called");
+			deleteBillItem(request, response);
+			break;
+
+		// Open insert-service-form.jsp [Insert services form]
 		case "/new":
+			System.out.println("\n=========================");
+			System.out.print("Servlet: new called");
 			showInsertPage(request, response);
 			break;
+
+		// Insert new service to the DB
 		case "/insert":
-			try {
-				getServiceDetails(request, response);
-			} catch (Exception e) {
-				System.err.println(e.getMessage());
-			}
+			System.out.println("\n=========================");
+			System.out.print("Servlet: insert called");
+			getServiceDetails(request, response);
 			break;
 		case "/edit":
 
@@ -58,27 +78,35 @@ public class serviceServlet extends HttpServlet {
 		case "/delete":
 
 			break;
-		case "/toBill":
-			System.out.print("\nGot the ADD to Bill Request\n");
-			addTobill(request, response);
-			break;
+
 		default:
 			break;
 		}
 	}
 
+	// Delete bill item from the DB
+	private void deleteBillItem(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		int id = Integer.parseInt(request.getParameter("bill-item-id"));
+		// log-User selected bill item id
+		System.out.println("Selected bill item ID: " + id);
+		billDAO.deleteBillItem(id);
+		// log
+		System.out.println("Redirecting to Landing page");
+		
+		response.sendRedirect("billing_landing_page.jsp");
+	}
+
 	// Navigate user to the services page
 	private void navigateToServices(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("service.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("service.jsp");
 	}
 
 	// Navigate user to the insert services form
 	private void showInsertPage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher dispatcher = request.getRequestDispatcher("insert-service-form.jsp");
-		dispatcher.forward(request, response);
+		response.sendRedirect("insert-service-form.jsp");
 	}
 
 	// Insert service from insert service form to Database
@@ -103,12 +131,9 @@ public class serviceServlet extends HttpServlet {
 		System.err.print("Selected ID by user: ");
 		System.out.println(request.getParameter("service-id") + "\n");
 
-		// serviceDAO.getServiceByID(Integer.parseInt(request.getParameter("service-id")));
-
 		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("billing_landing_page.jsp");
-		dispatcher.forward(request, response);
+
+		response.sendRedirect("billing_landing_page.jsp");
 	}
 
 }

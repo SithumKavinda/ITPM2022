@@ -76,7 +76,11 @@ List<Service> serviceList = serviceDAO.getAllServices();
 							<td align="center"><%=s.getDiscount()%></td>
 							<td align="center"><%=s.getPrice()%></td>
 							<td align="center">
-								<button name="" id="btn_rm" onclick="">Remove</button>
+								<form action="deleteBillItem" method="post">
+									<input type="text" value="<%=s.getServiceID()%>"
+										name="bill-item-id" style="display: none;">
+									<button id="btn_rm" type="submit">Remove</button>
+								</form>
 							</td>
 						</tr>
 
