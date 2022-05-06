@@ -1,8 +1,9 @@
 package itpm.carcare.payment.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import itpm.carcare.payment.models.BillDAO;
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
 import jakarta.servlet.RequestDispatcher;
@@ -17,11 +18,9 @@ public class serviceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ServiceDAO serviceDAO;
-	private BillDAO billDAO;
 
 	public serviceServlet() {
 		serviceDAO = new ServiceDAO();
-		billDAO = new BillDAO();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,10 +35,6 @@ public class serviceServlet extends HttpServlet {
 		String action = request.getServletPath();
 
 		switch (action) {
-		case "home":
-			RequestDispatcher dispatcher = request.getRequestDispatcher("service.jsp");
-			dispatcher.forward(request, response);
-			break;
 		case "/services":
 			navigateToServices(request, response);
 			System.err.println("Servlet Activated");
@@ -64,43 +59,26 @@ public class serviceServlet extends HttpServlet {
 
 			break;
 		case "/toBill":
-			System.out.println("\n===========================");
-			System.out.println("Servlet: toBill called");
+			System.out.print("\nGot the ADD to Bill Request\n");
 			addTobill(request, response);
-			break;
-		case "/deleteBillItem":
-			System.out.println("\n===========================");
-			System.out.println("Servlet: deleteBillItem called");
-			deleteBillItem(request, response);
 			break;
 		default:
 			break;
 		}
 	}
 
-	// Delete bill table row
-	private void deleteBillItem(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		int billItemID = Integer.parseInt(request.getParameter("bill-delete-btn"));
-		// log-user selected bill item ID
-		System.out.println("Bill item ID: " + billItemID);
-
-		// Redirect to the homepage
-		response.sendRedirect("billing_landing_page.jsp");
-
-		billDAO.deleteBillItem(billItemID);
-	}
-
 	// Navigate user to the services page
 	private void navigateToServices(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		response.sendRedirect("service.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("service.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	// Navigate user to the insert services form
 	private void showInsertPage(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("insert-service-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("insert-service-form.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	// Insert service from insert service form to Database
@@ -128,9 +106,9 @@ public class serviceServlet extends HttpServlet {
 		// serviceDAO.getServiceByID(Integer.parseInt(request.getParameter("service-id")));
 
 		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));
-
-		// Redirect to Landing Page
-		response.sendRedirect("billing_landing_page.jsp");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("billing_landing_page.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

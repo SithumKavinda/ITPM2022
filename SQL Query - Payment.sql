@@ -42,9 +42,7 @@ CREATE TABLE `carcare`.`bill` (
 
 SELECT * FROM carcare.bill;
 
-INSERT INTO `carcare`.`bill` (`service_id`, `service_name`, `discount`, `price`) VALUES ('2', 'Sample Service', '4', '300');
-
-TRUNCATE TABLE `carcare`.`bill`;
+INSERT INTO `carcare`.`bill` (`service_id`, `service_name`, `discount`, `price`) VALUES ('2', 'Sample Service', '4', '300');bill
   
   
   

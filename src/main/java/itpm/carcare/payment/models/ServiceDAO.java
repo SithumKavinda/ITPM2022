@@ -3,6 +3,7 @@ package itpm.carcare.payment.models;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -198,12 +199,10 @@ public class ServiceDAO {
 
 			pst = con.prepareStatement(INSERTQUERY);
 
-			double price = service.getPrice() - ((service.getPrice() / 100) * service.getDiscount());
-
 			pst.setInt(1, service.getServiceID());
 			pst.setString(2, service.getServiceName());
 			pst.setDouble(3, service.getDiscount());
-			pst.setDouble(4, price);
+			pst.setDouble(4, service.getPrice());
 
 			System.err.print("Insert Query: ");
 			System.out.println(pst.toString() + "\n");

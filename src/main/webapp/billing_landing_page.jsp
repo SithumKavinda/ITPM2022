@@ -1,5 +1,5 @@
 
-<%@page import="itpm.carcare.payment.models.BillDAO"%>
+<%@page import="itpm.carcare.payment.models.billDAO"%>
 <%@ page import="itpm.carcare.payment.models.Service"%>
 <%@ page import="java.util.List"%>
 <%@ page import="itpm.carcare.payment.models.ServiceDAO"%>
@@ -7,7 +7,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 ServiceDAO serviceDAO = new ServiceDAO();
-BillDAO billDAO = new BillDAO();
+billDAO billDAO = new billDAO();
 
 List<Service> billList = billDAO.getBillList();
 List<Service> serviceList = serviceDAO.getAllServices();
@@ -76,15 +76,9 @@ List<Service> serviceList = serviceDAO.getAllServices();
 							<td align="center"><%=s.getDiscount()%></td>
 							<td align="center"><%=s.getPrice()%></td>
 							<td align="center">
-								<form action="deleteBillItem" method="post">
-									<input type="text" readonly="readonly" style="display: none;"
-										value="<%=s.getServiceID()%>" name="bill-delete-btn">
-									<button id="btn_rm" onclick="">Remove</button>
-								</form>
+								<button name="" id="btn_rm" onclick="">Remove</button>
 							</td>
 						</tr>
-
-
 
 						<%
 						}
@@ -92,10 +86,9 @@ List<Service> serviceList = serviceDAO.getAllServices();
 						%>
 
 
-
 						<tr>
 							<th align="center" colspan="4">TOTAL</th>
-							<th align="center"><%=billDAO.getTotalBill()%></th>
+							<th align="center"></th>
 						</tr>
 					</tbody>
 				</table>
@@ -130,8 +123,6 @@ List<Service> serviceList = serviceDAO.getAllServices();
 					}
 					}
 					%>
-
-
 
 				</div>
 			</div>
