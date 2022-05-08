@@ -1,6 +1,8 @@
 package itpm.carcare.inventory.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import itpm.carcare.inventory.models.InventoryItem;
 import itpm.carcare.inventory.models.InventoryItemDAO;
@@ -46,6 +48,9 @@ public class serviceServlet extends HttpServlet {
 			System.out.println("Servlet: backToInventoryMain called");
 			proceedToAddInventory(request, response);
 			break;
+		case "/backToMainpage":
+			proceedToAddInventory(request, response);
+			break;
 		case "/insertInventory":
 			insertInventory(request, response);
 			break;
@@ -55,9 +60,53 @@ public class serviceServlet extends HttpServlet {
 		case "/updateRecord":
 			updateInventory(request, response);
 			break;
+		case "/inventoryMain":
+			inventoryMain(request, response);
+			break;
+		case "/searchInventory":
+			searchInventory(request, response);
+			break;
+		case "/addInventoryPage":
+			goToAddInventory(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void goToAddInventory(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		response.sendRedirect("add_inventory_page.jsp");
+	}
+
+	private void inventoryMain(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
+		request.setAttribute("searchResult", inventoryList);
+
+		RequestDispatcher rd = request.getRequestDispatcher("inventory_main_page.jsp");
+		rd.forward(request, response);
+	}
+
+	private void searchInventory(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		String searchQuery = request.getParameter("search-text");
+		// log
+		System.out.println("Search Query: " + searchQuery);
+
+		List<InventoryItem> inventoryList = inventoryItemDAO.searchInventory(searchQuery);
+
+		if (!inventoryList.isEmpty()) {
+			for (InventoryItem inventoryItem : inventoryList) {
+				System.out.println("Result: " + inventoryItem.getInventoryID() + " " + inventoryItem.getItemName() + " "
+						+ inventoryItem.getPurchasedPrice() + " " + inventoryItem.getQuantity());
+			}
+		}
+
+		request.setAttribute("searchResult", inventoryList);
+
+		RequestDispatcher rd = request.getRequestDispatcher("inventory_main_page.jsp");
+		rd.forward(request, response);
 	}
 
 	private void updateInventory(HttpServletRequest request, HttpServletResponse response)
@@ -76,7 +125,9 @@ public class serviceServlet extends HttpServlet {
 		inventoryItemDAO.editInventoryItem(inventoryItem);
 
 		// proceed to Inventory main page
-		response.sendRedirect("inventory_main_page.jsp");
+		// Proceed to inventory_main_page.jsp
+		RequestDispatcher rd = request.getRequestDispatcher("/inventoryMain");
+		rd.forward(request, response);
 	}
 
 	private void proceedToEdit(HttpServletRequest request, HttpServletResponse response)
@@ -105,7 +156,8 @@ public class serviceServlet extends HttpServlet {
 
 		inventoryItemDAO.insertInventoryItem(inventoryItem);
 
-		response.sendRedirect("inventory_main_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/inventoryMain");
+		rd.forward(request, response);
 	}
 
 	private void proceedToItemDetails(HttpServletRequest request, HttpServletResponse response)
@@ -116,7 +168,8 @@ public class serviceServlet extends HttpServlet {
 
 	private void proceedToAddInventory(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		response.sendRedirect("add_inventory_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/inventoryMain");
+		rd.forward(request, response);
 	}
 
 	private void deleteInventory(HttpServletRequest request, HttpServletResponse response)
@@ -127,6 +180,7 @@ public class serviceServlet extends HttpServlet {
 		inventoryItemDAO.deleteInventoryItem(inventoryItemID);
 
 		// Proceed to inventory_main_page.jsp
-		response.sendRedirect("inventory_main_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/inventoryMain");
+		rd.forward(request, response);
 	}
 }

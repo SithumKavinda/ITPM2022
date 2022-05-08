@@ -150,4 +150,42 @@ public class InventoryItemDAO {
 
 		return inventoryItem;
 	}
+
+	// Search Inventory
+	public List<InventoryItem> searchInventory(String searchQuery) {
+		String SEARCH = "SELECT * FROM inventory WHERE inventory_name LIKE ?;";
+		List<InventoryItem> inventoryList = new ArrayList<InventoryItem>();
+
+		try {
+
+			con = DBConnect.getConnection();
+
+			pst = con.prepareStatement(SEARCH);
+			pst.setString(1, "%" + searchQuery + "%");
+			// log
+			System.out.println("SQL Statement: " + pst.toString());
+
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				InventoryItem inventoryItem = new InventoryItem();
+				inventoryItem.setInventoryID(rs.getInt("inventory_id"));
+				inventoryItem.setItemName(rs.getString("inventory_name"));
+				inventoryItem.setPurchasedPrice(rs.getDouble("purchasedPrice"));
+				inventoryItem.setQuantity(rs.getInt("quantity"));
+
+				inventoryList.add(inventoryItem);
+
+				// log
+				System.out.println("Result: " + inventoryItem.getInventoryID() + " " + inventoryItem.getItemName() + " "
+						+ inventoryItem.getPurchasedPrice() + " " + inventoryItem.getQuantity());
+			}
+
+		} catch (Exception e) {
+			System.out.println("searchInventory() => ");
+			System.err.println(e.getMessage());
+		}
+
+		return inventoryList;
+	}
 }

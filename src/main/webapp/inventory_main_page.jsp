@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="itpm.carcare.inventory.models.InventoryItem"%>
 <%@page import="java.util.List"%>
 <%@page import="itpm.carcare.inventory.models.InventoryItemDAO"%>
@@ -5,13 +6,16 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 InventoryItemDAO inventoryItemDAO = new InventoryItemDAO();
-List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
+List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResult");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Inventory</title>
+
+<script src="https://kit.fontawesome.com/66bf06966e.js"
+	crossorigin="anonymous"></script>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/inventory_main_page.css" />
@@ -37,9 +41,10 @@ List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
 			<!-- Table Section -->
 			<div class="table_section">
 				<div class="search_section">
-					<form action="#">
+					<form action="searchInventory" method="post">
 						<div class="search_box">
-							<input type="text" id="searchService">
+							<input type="text" id="searchService" placeholder="Search..."
+								name="search-text">
 						</div>
 						<div class="search_button">
 							<input type="submit" value="Search" id="searchButton">
@@ -71,8 +76,9 @@ List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
 								<td class="col-md-1 text-center"><%=i.getQuantity()%></td>
 								<td class="col-md-1 text-center">
 									<form action="proceedToEdit" method="post">
-										<input type="text" name="inventory-id-main" style="display: none;"
-											readonly="readonly" value="<%=i.getInventoryID()%>">
+										<input type="text" name="inventory-id-main"
+											style="display: none;" readonly="readonly"
+											value="<%=i.getInventoryID()%>">
 										<button type="submit" id="btn_item">EDIT</button>
 									</form>
 								</td>
@@ -97,7 +103,7 @@ List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
 			</div>
 			<div class="button_group_section">
 				<div>
-					<form action="proceedToAddInventory" method="post">
+					<form action="addInventoryPage" method="post">
 						<button type="submit">Add Inventory</button>
 					</form>
 				</div>

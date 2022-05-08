@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Inventory</title>
+<script src="https://kit.fontawesome.com/66bf06966e.js"
+	crossorigin="anonymous"></script>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/add_inventory_page.css" />

@@ -11,6 +11,8 @@ InventoryItem inventoryItem = (InventoryItem) request.getAttribute("InventoryIte
 <title>Update Inventory</title>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/update_inventory_page.css" />
+<script src="https://kit.fontawesome.com/66bf06966e.js"
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<div class="back-button">
