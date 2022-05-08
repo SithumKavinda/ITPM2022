@@ -1,5 +1,9 @@
+<%@page import="itpm.carcare.inventory.models.InventoryItem"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%
+InventoryItem inventoryItem = (InventoryItem) request.getAttribute("InventoryItemToEdit");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,18 +26,24 @@
 			<h1>Update Inventory</h1>
 		</div>
 		<div id="center" class="form-body">
-			<form action="insert" method="post">
+			<form action="updateRecord" method="post">
+				<div>
+					<input id="text-input" type="text" name="item-id-insert"
+						placeholder="Inventory ID" style="display: none;"
+						value="<%=inventoryItem.getInventoryID()%>">
+				</div>
 				<div>
 					<input id="text-input" type="text" name="item-name-insert"
-						placeholder="Item Name">
+						placeholder="Item Name" value="<%=inventoryItem.getItemName()%>">
 				</div>
 				<div>
 					<input id="text-input" type="text" name="purchased-price-insert"
-						placeholder="Purchased price" />
+						placeholder="Purchased price"
+						value="<%=inventoryItem.getPurchasedPrice()%>" />
 				</div>
 				<div>
 					<input id="text-input" type="text" name="quantity-insert"
-						placeholder="Quantity" />
+						placeholder="Quantity" value="<%=inventoryItem.getQuantity()%>" />
 				</div>
 
 				<button id="btn_rm" type="reset">Reset</button>

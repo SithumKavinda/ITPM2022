@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import itpm.carcare.inventory.models.InventoryItem;
 import itpm.carcare.inventory.models.InventoryItemDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -51,19 +52,42 @@ public class serviceServlet extends HttpServlet {
 		case "/proceedToEdit":
 			proceedToEdit(request, response);
 			break;
+		case "/updateRecord":
+			updateInventory(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void updateInventory(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		int inventoryID = Integer.parseInt(request.getParameter("item-id-insert"));
+		String item_name = request.getParameter("item-name-insert");
+		double purchase_price = Double.parseDouble(request.getParameter("purchased-price-insert"));
+		int quantity = Integer.parseInt(request.getParameter("quantity-insert"));
+
+		InventoryItem inventoryItem = new InventoryItem();
+		inventoryItem.setInventoryID(inventoryID);
+		inventoryItem.setItemName(item_name);
+		inventoryItem.setPurchasedPrice(purchase_price);
+		inventoryItem.setQuantity(quantity);
+
+		inventoryItemDAO.editInventoryItem(inventoryItem);
+
+		// proceed to Inventory main page
+		response.sendRedirect("inventory_main_page.jsp");
 	}
 
 	private void proceedToEdit(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 		InventoryItem inventoryItem = inventoryItemDAO
 				.getInventoryByID(Integer.parseInt(request.getParameter("inventory-id-main")));
-		
-		
-		
-		response.sendRedirect("update_inventory_page.jsp");
+
+		request.setAttribute("InventoryItemToEdit", inventoryItem);
+
+		RequestDispatcher rd = request.getRequestDispatcher("update_inventory_page.jsp");
+		rd.forward(request, response);
 	}
 
 	private void insertInventory(HttpServletRequest request, HttpServletResponse response)
