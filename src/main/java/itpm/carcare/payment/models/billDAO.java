@@ -98,7 +98,16 @@ public class billDAO {
 
 		if (!serviceList.isEmpty()) {
 			for (Service service : serviceList) {
-				total += service.getPrice();
+				double price = service.getPrice();
+				double discount = service.getDiscount();
+				double discountPrice = (price / 100) * discount;
+				double finalPrice = price - discountPrice;
+
+				total += finalPrice;
+
+				// log
+				System.out.println("Prices: price = " + price + " discount = " + discount + " discountPrice = "
+						+ discountPrice + " finalPrice = " + finalPrice);
 			}
 		}
 

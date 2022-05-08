@@ -4,6 +4,7 @@ import java.io.IOException;
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
 import itpm.carcare.payment.models.billDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -105,6 +106,7 @@ public class serviceServlet extends HttpServlet {
 
 			getServiceDetails(request, response);
 			break;
+		// Delete service from the DB
 		case "/deleteService":
 			// log
 			System.out.println("\n=========================");
@@ -112,10 +114,71 @@ public class serviceServlet extends HttpServlet {
 
 			deleteService(request, response);
 			break;
-
+		// Load service to the edit-service.jsp
+		case "/loadService":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: loadService called");
+			loadService(request, response);
+			break;
+		case "/editService":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: editService called");
+			updateService(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	// update service data
+	private void updateService(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		int service_id = Integer.parseInt(request.getParameter("serviceIDEdit"));
+		String service_name = request.getParameter("serviceNameEdit");
+		double discount = Double.parseDouble(request.getParameter("discountEdit"));
+		double price = Double.parseDouble(request.getParameter("priceEdit"));
+
+		// log
+		System.out.println("Assign current data to a model object");
+
+		Service service = new Service(service_id, service_name, discount, price);
+
+		// log
+		System.out.println("Service: service ID = " + service.getServiceID() + " name = " + service.getServiceName()
+				+ " Discount: " + service.getDiscount() + " Price: " + service.getPrice());
+
+		serviceDAO.editService(service);
+
+		// log
+		System.out.println("Proceeding to service.jsp");
+
+		// response.sendRedirect("service.jsp");
+		// new
+		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
+		rd.forward(request, response);
+
+	}
+
+	// load service into form
+	private void loadService(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		int service_id = Integer.parseInt(request.getParameter("service-id-edit"));
+		// log
+		System.out.println("Service ID: " + service_id);
+
+		Service service = serviceDAO.getService(service_id);
+
+		request.setAttribute("loadService", service);
+
+		// log
+		System.out.println("Proceeding to edit-service.jsp");
+
+		// Proceed to edit-service.jsp
+		RequestDispatcher rd = request.getRequestDispatcher("edit-service-form.jsp");
+		rd.forward(request, response);
 	}
 
 	// Delete service
@@ -126,8 +189,8 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Service ID: " + service_id);
 		serviceDAO.deleteService(service_id);
-		
-		//log
+
+		// log
 		System.out.println("Proceeding to service.jsp");
 		proceedServices(request, response);
 	}
@@ -138,7 +201,9 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Proceeding to service.jsp");
 
-		response.sendRedirect("service.jsp");
+		// response.sendRedirect("service.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
+		rd.forward(request, response);
 	}
 
 	// Proceed user to landing page
@@ -147,7 +212,9 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Proceeding to billing_landing_page.jsp");
 
-		response.sendRedirect("billing_landing_page.jsp");
+		// response.sendRedirect("billing_landing_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
+		rd.forward(request, response);
 	}
 
 	// Proceed user to the insert services form
@@ -155,7 +222,9 @@ public class serviceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// log
 		System.out.println("Proceeding to insert-service-form.jsp");
-		response.sendRedirect("insert-service-form.jsp");
+		// response.sendRedirect("insert-service-form.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("insert-service-form.jsp");
+		rd.forward(request, response);
 	}
 
 	// Delete bill item from the DB
@@ -169,7 +238,9 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Redirecting to Landing page");
 
-		response.sendRedirect("billing_landing_page.jsp");
+		// response.sendRedirect("billing_landing_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
+		rd.forward(request, response);
 	}
 
 	// Insert service from insert service form to Database
@@ -182,7 +253,9 @@ public class serviceServlet extends HttpServlet {
 		service.setDiscount(Double.parseDouble(request.getParameter("discount")));
 		service.setPrice(Double.parseDouble(request.getParameter("price")));
 
-		response.sendRedirect("service.jsp");
+		// response.sendRedirect("service.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
+		rd.forward(request, response);
 
 		serviceDAO.addService(service);
 	}
@@ -196,7 +269,9 @@ public class serviceServlet extends HttpServlet {
 
 		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));
 
-		response.sendRedirect("billing_landing_page.jsp");
+		// response.sendRedirect("billing_landing_page.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
+		rd.forward(request, response);
 	}
 
 }

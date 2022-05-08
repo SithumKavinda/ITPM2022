@@ -70,11 +70,17 @@ List<Service> serviceList = serviceDAO.getAllServices();
 						<td class="col-md-2 text-start"><%=s.getServiceName()%></td>
 						<td class="col-md-1 text-center"><%=s.getDiscount()%></td>
 						<td class="col-md-1 text-center"><%=s.getPrice()%></td>
+
+						<!-- Edit Button -->
 						<td class="col-md-1 text-center">
-							<form action="#" method="post">
+							<form action="loadService" method="post">
+								<input name="service-id-edit" type="text"
+									value="<%=s.getServiceID()%>" style="display: none;">
 								<button id="btn_service">EDIT</button>
 							</form>
 						</td>
+
+						<!-- Delete Button -->
 						<td class="col-md-1 text-center">
 							<form action="deleteService" method="post">
 								<input name="service-ID-service-jsp" type="text"
@@ -88,7 +94,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 					}
 					%>
 
-					</tr>
+
 				</tbody>
 			</table>
 		</div>

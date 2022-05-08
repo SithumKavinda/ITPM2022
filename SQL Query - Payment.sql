@@ -50,6 +50,8 @@ DELETE FROM `carcare`.`bill` WHERE service_id=?;
 
 SELECT price FROM carcare.bill;
 
+select * from bill where service_id = ?;
+
   
   
 

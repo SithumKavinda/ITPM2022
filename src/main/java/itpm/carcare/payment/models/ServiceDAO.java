@@ -3,7 +3,6 @@ package itpm.carcare.payment.models;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -256,5 +255,43 @@ public class ServiceDAO {
 		}
 
 		return searchedServices;
+	}
+
+	// get service by ID
+	public Service getService(int service_id) {
+		// log
+		System.out.println("\ngetService() => Getting Service");
+
+		Service service = new Service();
+		String GETSERVICE = "select * from bill where service_id = ?;";
+
+		try {
+			con = DBConnect.getConnection();
+
+			pst = con.prepareStatement(GETSERVICE);
+			pst.setInt(1, service_id);
+			// log
+			System.out.println("SQL Query: " + pst.toString());
+
+			rs = pst.executeQuery();
+
+			rs.next();
+
+			service.setServiceID(rs.getInt("service_id"));
+			service.setServiceName(rs.getString("service_name"));
+			service.setDiscount(rs.getDouble("discount"));
+			service.setPrice(rs.getDouble("price"));
+
+			// log
+			System.out.println("service => " + service.getServiceID() + " " + service.getServiceName() + " "
+					+ service.getDiscount() + " " + service.getPrice());
+
+		} catch (Exception e) {
+			System.out.print("getService() => ");
+			System.err.println("get service failed");
+			System.err.println(e.getMessage());
+		}
+
+		return service;
 	}
 }
