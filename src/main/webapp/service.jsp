@@ -31,7 +31,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 </head>
 <body>
 	<div class="back-button">
-		<form action="home" method="post">
+		<form action="bill" method="post">
 			<button type="submit">
 				<i class="fa-solid fa-circle-chevron-left"></i>
 			</button>

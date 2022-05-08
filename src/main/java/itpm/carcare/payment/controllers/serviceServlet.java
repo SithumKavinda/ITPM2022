@@ -1,6 +1,8 @@
 package itpm.carcare.payment.controllers;
 
 import java.io.IOException;
+import java.util.List;
+
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
 import itpm.carcare.payment.models.billDAO;
@@ -35,6 +37,9 @@ public class serviceServlet extends HttpServlet {
 		String action = request.getServletPath();
 
 		switch (action) {
+		case "/bill":
+			loadBillMainPage(request, response);
+			break;
 		// Open service.jsp [Service List page]
 		case "/services":
 			// log
@@ -130,6 +135,18 @@ public class serviceServlet extends HttpServlet {
 		default:
 			break;
 		}
+	}
+
+	private void loadBillMainPage(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		List<Service> billList = billDAO.getBillList();
+		List<Service> serviceList = serviceDAO.getAllServices();
+
+		request.setAttribute("billList", billList);
+		request.setAttribute("serviceList", serviceList);
+
+		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
+		rd.forward(request, response);
 	}
 
 	// update service data
