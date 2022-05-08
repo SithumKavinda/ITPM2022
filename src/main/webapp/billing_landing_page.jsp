@@ -9,8 +9,8 @@
 ServiceDAO serviceDAO = new ServiceDAO();
 billDAO billDAO = new billDAO();
 
-List<Service> billList = (List<Service>)request.getAttribute("billList");
-List<Service> serviceList = (List<Service>)request.getAttribute("serviceList");
+List<Service> billList = billDAO.getBillList();
+List<Service> serviceList = serviceDAO.getAllServices();
 %>
 
 <!DOCTYPE html>

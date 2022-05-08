@@ -1,8 +1,6 @@
 package itpm.carcare.payment.controllers;
 
 import java.io.IOException;
-import java.util.List;
-
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
 import itpm.carcare.payment.models.billDAO;
@@ -37,9 +35,7 @@ public class serviceServlet extends HttpServlet {
 		String action = request.getServletPath();
 
 		switch (action) {
-		case "/bill":
-			loadBillMainPage(request, response);
-			break;
+
 		// Open service.jsp [Service List page]
 		case "/services":
 			// log
@@ -137,18 +133,6 @@ public class serviceServlet extends HttpServlet {
 		}
 	}
 
-	private void loadBillMainPage(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-		List<Service> billList = billDAO.getBillList();
-		List<Service> serviceList = serviceDAO.getAllServices();
-
-		request.setAttribute("billList", billList);
-		request.setAttribute("serviceList", serviceList);
-
-		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
-		rd.forward(request, response);
-	}
-
 	// update service data
 	private void updateService(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
@@ -172,10 +156,7 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Proceeding to service.jsp");
 
-		// response.sendRedirect("service.jsp");
-		// new
-		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("service.jsp");
 
 	}
 
@@ -218,9 +199,7 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Proceeding to service.jsp");
 
-		// response.sendRedirect("service.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("service.jsp");
 	}
 
 	// Proceed user to landing page
@@ -229,9 +208,7 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Proceeding to billing_landing_page.jsp");
 
-		// response.sendRedirect("billing_landing_page.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("billing_landing_page.jsp");
 	}
 
 	// Proceed user to the insert services form
@@ -239,9 +216,7 @@ public class serviceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// log
 		System.out.println("Proceeding to insert-service-form.jsp");
-		// response.sendRedirect("insert-service-form.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("insert-service-form.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("insert-service-form.jsp");
 	}
 
 	// Delete bill item from the DB
@@ -255,9 +230,7 @@ public class serviceServlet extends HttpServlet {
 		// log
 		System.out.println("Redirecting to Landing page");
 
-		// response.sendRedirect("billing_landing_page.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("billing_landing_page.jsp");
 	}
 
 	// Insert service from insert service form to Database
@@ -270,9 +243,7 @@ public class serviceServlet extends HttpServlet {
 		service.setDiscount(Double.parseDouble(request.getParameter("discount")));
 		service.setPrice(Double.parseDouble(request.getParameter("price")));
 
-		// response.sendRedirect("service.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("service.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("service.jsp");
 
 		serviceDAO.addService(service);
 	}
@@ -286,9 +257,7 @@ public class serviceServlet extends HttpServlet {
 
 		serviceDAO.addToBill(Integer.parseInt(request.getParameter("service-id")));
 
-		// response.sendRedirect("billing_landing_page.jsp");
-		RequestDispatcher rd = request.getRequestDispatcher("billing_landing_page.jsp");
-		rd.forward(request, response);
+		response.sendRedirect("billing_landing_page.jsp");
 	}
 
 }
