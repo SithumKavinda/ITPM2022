@@ -1,4 +1,3 @@
-
 <%@page import="itpm.carcare.payment.models.billDAO"%>
 <%@ page import="itpm.carcare.payment.models.Service"%>
 <%@ page import="java.util.List"%>
@@ -8,7 +7,6 @@
 <%
 ServiceDAO serviceDAO = new ServiceDAO();
 billDAO billDAO = new billDAO();
-
 List<Service> billList = billDAO.getBillList();
 List<Service> serviceList = serviceDAO.getAllServices();
 %>
@@ -20,9 +18,9 @@ List<Service> serviceList = serviceDAO.getAllServices();
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1" />
 <title>Billing</title>
-
+<!-- <link rel="stylesheet" href="style/payment/billing_landing_page.css" /> -->
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/billing_landing_page.css" />
+	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/inventory_main_page.css" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -52,82 +50,77 @@ List<Service> serviceList = serviceDAO.getAllServices();
 		<div class="body-section">
 			<!-- Bill Table -->
 			<div class="table-section">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">Service Name</th>
-							<th scope="col">Discount</th>
-							<th scope="col">Price</th>
-							<th scope="col">Remove</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-						if (!billList.isEmpty()) {
-							for (Service s : billList) {
-								double total = 0;
-								total += s.getPrice();
-						%>
+				<div class="table">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col">#</th>
+								<th scope="col">Service Name</th>
+								<th scope="col">Discount</th>
+								<th scope="col">Price</th>
+								<th scope="col">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+							<%
+							if (!billList.isEmpty()) {
+								for (Service s : billList) {
+									double total = 0;
+									total += s.getPrice();
+							%>
 
-						<tr>
-							<th align="center"><%=s.getServiceID()%></th>
-							<td align="center"><%=s.getServiceName()%></td>
-							<td align="center"><%=s.getDiscount()%></td>
-							<td align="center"><%=s.getPrice()%></td>
-							<td align="center">
-								<form action="deleteBillItem" method="post">
-									<input type="text" value="<%=s.getServiceID()%>"
-										name="bill-item-id" style="display: none;">
-									<button id="btn_rm" type="submit">Remove</button>
-								</form>
-							</td>
-						</tr>
+							<tr>
+								<th align="center"><%=s.getServiceID()%></th>
+								<td align="center"><%=s.getServiceName()%></td>
+								<td align="center"><%=s.getDiscount()%></td>
+								<td align="center"><%=s.getPrice()%></td>
+								<td align="center">
+									<form action="deleteBillItem" method="post">
+										<input type="text" value="<%=s.getServiceID()%>"
+											name="bill-item-id" style="display: none" />
+										<button id="btn_rm" type="submit">Remove</button>
+									</form>
+								</td>
+							</tr>
 
-						<%
-						}
-						}
-						%>
-
-
-						<tr>
-							<th align="center" colspan="4">TOTAL</th>
-							<th align="center"><%=billDAO.getBillTotal()%></th>
-						</tr>
-					</tbody>
-				</table>
+							<%
+							}
+							}
+							%>
+						</tbody>
+					</table>
+				</div>
+				<div class="bottom-container">
+					<div class="Bill-Totals">
+						<div class="text">TOTAL</div>
+						<div class="total"><%=billDAO.getBillTotal()%></div>
+					</div>
+					<div class="Generate-bill-area">
+						<form action="paymentMethod">
+							<input id="btn-nav" type="submit" value="PAY" />
+						</form>
+					</div>
+				</div>
 			</div>
 
 			<!-- Service List -->
 			<div class="services-section">
 				<!-- Search Bar -->
-				<div class="search-bar">
-					<navbar id="search-bar" class="navbar navbar-light bg-opacity-100">
-					<form class="form-inline" method="get" action="searchService">
-						<input class="form-control-sm" type="search"
-							placeholder="Search Service" name="searchText" />
-						<button id="btn-nav" class="btn btn-group-sm" type="submit">
-							Search</button>
-					</form>
-					</navbar>
-				</div>
+
 				<div class="service-list">
 					<%
 					if (!serviceList.isEmpty()) {
 						for (Service s : serviceList) {
 					%>
 					<form action="toBill" method="post">
-						<button type="submit">
-							<%=s.getServiceName()%>
-						</button>
+						<button type="submit"><%=s.getServiceName()%></button>
 						<input type="text" name="service-id" value="<%=s.getServiceID()%>"
-							readonly="readonly" style="display: none;">
+							readonly="readonly" style="display: none" />
 					</form>
 					<%
 					}
 					}
 					%>
-
 				</div>
 			</div>
 		</div>
@@ -137,3 +130,5 @@ List<Service> serviceList = serviceDAO.getAllServices();
 	<div class="res-error">Invalid Display Resolution!</div>
 </body>
 </html>
+</Service>
+</Service>

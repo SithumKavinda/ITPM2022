@@ -128,9 +128,78 @@ public class serviceServlet extends HttpServlet {
 			System.out.println("Servlet: editService called");
 			updateService(request, response);
 			break;
+		case "/generateBill":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: generateBill called");
+			// Error
+			getError(request, response);
+			break;
+		case "/paymentMethod":
+			// log
+			System.out.println("\n=========================");
+			System.out.println("Servlet: paymentMethod called");
+			openPaymentMethodPage(request, response);
+			break;
+		case "/proceedPayment":
+			System.out.println("\n=========================");
+			System.out.println("Servlet: proceedPayment called");
+
+			String method = request.getParameter("payment-method");
+
+			if (!method.equals("card")) {
+				// log
+				System.out.println("Cash Method selected");
+				proceedToCashPayment(request, response);
+
+			} else if (method.equals("card")) {
+				// log
+				System.out.println("Card Method selected");
+				proceedToCardPayment(request, response);
+			}
+
+			break;
+		case "/error":
+			loadError(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void loadError(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		RequestDispatcher rs = request.getRequestDispatcher("error-page.jsp");
+		rs.forward(request, response);
+	}
+
+	private void proceedToCashPayment(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		double totalAmount = billDAO.getBillTotal();
+		request.setAttribute("total_amount", totalAmount);
+		RequestDispatcher rs = request.getRequestDispatcher("cash-payment-page.jsp");
+		rs.forward(request, response);
+	}
+
+	private void proceedToCardPayment(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		RequestDispatcher rs = request.getRequestDispatcher("card-payment-page.jsp");
+		rs.forward(request, response);
+
+	}
+
+	private void openPaymentMethodPage(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		double totalAmount = billDAO.getBillTotal();
+		request.setAttribute("total_amount", totalAmount);
+		RequestDispatcher rs = request.getRequestDispatcher("payment-method.jsp");
+		rs.forward(request, response);
+	}
+
+	private void getError(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		response.sendRedirect("Error-page.jsp");
+
 	}
 
 	// update service data
