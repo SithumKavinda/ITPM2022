@@ -26,7 +26,9 @@ pageEncoding="ISO-8859-1"%>
       </div>
     </div>
     <div class="proceed-to-home">
-      <button>Home</button>
+      <form action="http://localhost:8051/categoryapi/webapi/categories" method="get">
+      	<input type="submit" value="Get Table">
+      </form>
     </div>
   </body>
 </html>

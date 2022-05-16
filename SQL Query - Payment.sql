@@ -1,4 +1,5 @@
 CREATE DATABASE carcare;
+USE carcare;
 
 -- service table
 CREATE TABLE `carcare`.`service` (
@@ -8,11 +9,11 @@ CREATE TABLE `carcare`.`service` (
   `price` DOUBLE(10,2) NULL,
   PRIMARY KEY (`service_id`));
   
-  select * from bill where user_id = 3;
+-- select * from bill where user_id = 3;
 -- Search
-	SELECT * FROM `carcare`.`service` where service_name LIKE "Exter%";
+-- SELECT * FROM `carcare`.`service` where service_name LIKE "Exter%";
     
-    SELECT * FROM `carcare`.`service` where service_id=?;
+-- SELECT * FROM `carcare`.`service` where service_id=?;
 -- Retrieve service
 -- SELECT * FROM `carcare`.`service`;
 
@@ -26,12 +27,12 @@ CREATE TABLE `carcare`.`service` (
 -- DELETE FROM `carcare`.`service` WHERE (`service_id` = ?);
 
 -- user table
-CREATE TABLE `carcare`.`user` (
-	`user_id` INT NOT NULL AUTO_INCREMENT,
-    `username` VARCHAR(50),
-    PRIMARY KEY (`user_id`));
+# CREATE TABLE `carcare`.`user` (
+# 	`user_id` INT NOT NULL AUTO_INCREMENT,
+#     `username` VARCHAR(50),
+#     PRIMARY KEY (`user_id`));
     
-SELECT * FROM `carcare`.`user`;
+-- SELECT * FROM `carcare`.`user`;
 
 CREATE TABLE `carcare`.`bill` (
   `service_id` INT NULL,
@@ -40,17 +41,17 @@ CREATE TABLE `carcare`.`bill` (
   `price` DOUBLE(10,2) NULL
 );
 
-SELECT * FROM carcare.bill;
+-- SELECT * FROM carcare.bill;
 
-INSERT INTO `carcare`.`bill` (`service_id`, `service_name`, `discount`, `price`) VALUES ('2', 'Sample Service', '4', '300');
+-- INSERT INTO `carcare`.`bill` (`service_id`, `service_name`, `discount`, `price`) VALUES ('2', 'Sample Service', '4', '300');
 
-TRUNCATE TABLE `carcare`.`bill`;
+-- TRUNCATE TABLE `carcare`.`bill`;
   
-DELETE FROM `carcare`.`bill` WHERE service_id=?;
+-- DELETE FROM `carcare`.`bill` WHERE service_id=?;
 
-SELECT price FROM carcare.bill;
+-- SELECT price FROM carcare.bill;
 
-select * from bill where service_id = ?;
+-- select * from bill where service_id = ?;
 
   
   
