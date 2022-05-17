@@ -1,4 +1,13 @@
 # Car-Care Management System
+This project is based on a car service center business in Sri Lanka called The Car Clinic.
+Due to the increasing number of vehicles they have to repair, managing the inventory has been difficult to manage when done manually.
+
+
+
+
+
+
+
 
 # Functionalities
 - Inventory Management [Kaveesha]
