@@ -30,7 +30,7 @@ pageEncoding="ISO-8859-1"%>
       crossorigin="anonymous"
     />
   </head>
-  <body onload="defaultThings()">
+  <body>
     <div class="back-button">
       <form action="backToServices" method="post">
         <button type="submit">
@@ -49,7 +49,6 @@ pageEncoding="ISO-8859-1"%>
           method="post"
           name="insertForm"
           id="insertForm"
-          onsubmit="return validateForm()"
         >
           <!-- Service Name -->
           <div>
@@ -58,7 +57,6 @@ pageEncoding="ISO-8859-1"%>
               type="text"
               name="serviceName"
               placeholder="Service Name"
-              oninput="validateName()"
             />
             <!-- Name error -->
             <div id="nameError" class="alert alert-danger p-1" role="alert">
@@ -73,7 +71,6 @@ pageEncoding="ISO-8859-1"%>
               type="number"
               name="discount"
               placeholder="Discount"
-              oninput="validateDiscount()"
             />
             <!-- Discount error -->
             <div id="discountError" class="alert alert-danger p-1" role="alert">
@@ -88,7 +85,6 @@ pageEncoding="ISO-8859-1"%>
               type="number"
               name="price"
               placeholder="Price"
-              oninput="validatePrice()"
             />
             <!-- price error -->
             <div id="priceError" class="alert alert-danger p-1" role="alert">
@@ -105,7 +101,7 @@ pageEncoding="ISO-8859-1"%>
           <div id="center" class="submit-button-area">
             <input
               type="submit"
-              value="Inser Service"
+              value="Insert Service"
               name="submitBtn"
               id="btn-nav"
             />
