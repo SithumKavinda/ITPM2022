@@ -24,21 +24,6 @@ body {
   background: linear-gradient(90deg, rgb(118, 45, 20) 0%, rgb(56, 98, 92) 100%);
 }
 
-/* Scroll Bar */
-::-webkit-scrollbar {
-  width: 5px;
-  padding: 2px;
-}
-
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.6);
-  border-radius: 10px;
-}
-
 /*Remove the arrows of number input*/
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -52,14 +37,19 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.alert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: auto;
-  font-size: 10pt;
-  padding: 0;
-  margin-top: 5px;
+/* Scroll Bar */
+::-webkit-scrollbar {
+  width: 5px;
+  padding: 2px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
 }
 
 a {
@@ -110,48 +100,109 @@ a {
   background-color: rgb(255, 115, 0);
 }
 
-.service-main-container {
+.card-payment-main-container {
   background-color: rgba(255, 255, 255, 0.8);
   border-radius: 15px;
   box-shadow: 1px 1px 50px rgb(0, 0, 0, 0.7);
-  padding: 40px 30px 40px;
+  padding: 15px 20px 15px;
   height: auto;
   width: auto;
   max-height: 90vh;
 }
 
-.service-main-container .form-body {
-  height: 100%;
+/* Body Items */
+/* Header */
+.card-Payment-header {
+  padding: 15px 10px 10px;
+  margin-bottom: 20px;
 }
 
-.service-main-container .form-header {
+.card-Payment-header h1 {
+  font-size: 25pt;
+  color: rgb(118, 45, 20);
+  font-weight: bold;
+}
+
+/* card payment body */
+#align-center {
   display: flex;
-  justify-content: left;
   align-items: center;
-  padding: 30px 0;
 }
 
-.service-main-container .form-header h1 {
-  font-size: 30pt;
-
-  word-wrap: break-word;
+.card-payment-body div {
+  padding: 10px;
+  width: auto;
 }
 
-.service-main-container .form-body div {
-  padding: 20px 0 20px;
+.card-payment-body * {
+  font-size: 12pt;
 }
 
-#serviceName,
-#discount,
-#price {
+.card-payment-body div input {
   border: none;
   border-radius: 5px;
-  padding: 15px 15px 15px;
-  width: 30vw;
+  padding: 5px 10px 5px;
+  /* width: 80%; */
+}
+
+.card-payment-body .user-name input,
+.card-number input {
+  width: 100%;
+}
+
+.expiration {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  width: auto;
+}
+
+.expiration .month {
+  display: flex;
+  justify-content: center;
+}
+
+.expiration .year {
+  display: flex;
+  justify-content: center;
+}
+
+.expiration .month input {
+  width: 60px;
+  text-align: center;
+}
+
+.expiration .year input {
+  width: 90px;
+  text-align: center;
+}
+
+.cvv {
+  display: inline-flex;
+}
+
+.cvv input {
+  width: 80px;
+  text-align: center;
+}
+
+.cvv p {
+  color: red;
+  font-size: xx-small;
+  padding-left: 5px;
+  word-wrap: break-word;
+  width: 50%;
+}
+
+.submit-button {
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 /* Back button */
-.back-button {
+.back-button-area {
   width: auto;
   height: auto;
   padding: 0;
@@ -159,19 +210,20 @@ a {
   position: absolute;
   top: 70px;
   left: 60px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
-.back-button form {
+.back-button-area form {
   padding: 0;
 }
 
-.back-button button {
+.back-button-area button {
   border: none;
   padding: 0;
   background-color: rgba(219, 173, 21, 0);
 }
 
-.back-button i {
+.back-button-area i {
   color: rgba(255, 255, 255, 0.8);
   font-size: 30pt;
   padding: 1px;
