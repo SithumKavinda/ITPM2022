@@ -1,13 +1,10 @@
 # Car-Care Management System
-This project is based on a car service center business in Sri Lanka called The Car Clinic.
+
+This project is based on a car service center business in Sri Lanka called **The Car Clinic.**
 Due to the increasing number of vehicles they have to repair, managing the inventory has been difficult to manage when done manually.
 To make the business more efficient and more profitable, they wanted to automate all the business procedures.
 After going through their business procedures, we sorted out 4 functions needed to include in the application to make it a success.
 And these 4 functions cover the main business processes in the car service center.
-
-
-
-
 
 # Functionalities
 - Inventory Management [Kaveesha]
