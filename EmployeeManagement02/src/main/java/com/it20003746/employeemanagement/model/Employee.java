@@ -20,3 +20,11 @@ public class Employee {
 		this.contact = contact;
 	}
 	
+	public Employee(String name, String gender, String dob, String email, int contact) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.dob = dob;
+		this.email = email;
+		this.contact = contact;
+	}
