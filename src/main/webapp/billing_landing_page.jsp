@@ -4,6 +4,7 @@
 <%@ page import="itpm.carcare.payment.models.ServiceDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <%
 ServiceDAO serviceDAO = new ServiceDAO();
 billDAO billDAO = new billDAO();
@@ -14,26 +15,30 @@ List<Service> serviceList = serviceDAO.getAllServices();
 <!DOCTYPE html>
 <html>
 <head>
+<title>Billing</title>
+
+<!-- CSS -->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/billing_landing_page_updated.css" />
+
+<!-- Fontawesome -->
 <script src="https://kit.fontawesome.com/66bf06966e.js"
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1" />
-<title>Billing</title>
-<!-- <link rel="stylesheet" href="style/payment/billing_landing_page.css" /> -->
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/inventory_main_page.css" />
+
+<!-- Bootstrap -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous" />
-<!-- JavaScript Bundle with Popper -->
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 	crossorigin="anonymous"></script>
-
-<script src="js/payment/sample.js"></script>
 </head>
+
 <body>
 	<div class="main-container">
 		<!-- Header Section -->
@@ -50,11 +55,11 @@ List<Service> serviceList = serviceDAO.getAllServices();
 		<div class="body-section">
 			<!-- Bill Table -->
 			<div class="table-section">
-				<div class="table">
+				<div class="table-my">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th scope="col">#</th>
+								<th scope="col">Service ID</th>
 								<th scope="col">Service Name</th>
 								<th scope="col">Discount</th>
 								<th scope="col">Price</th>
@@ -112,11 +117,15 @@ List<Service> serviceList = serviceDAO.getAllServices();
 					if (!serviceList.isEmpty()) {
 						for (Service s : serviceList) {
 					%>
-					<form action="toBill" method="post">
-						<button type="submit"><%=s.getServiceName()%></button>
-						<input type="text" name="service-id" value="<%=s.getServiceID()%>"
-							readonly="readonly" style="display: none" />
-					</form>
+					<div>
+						<form action="toBill" method="post">
+							<button type="submit"><%=s.getServiceName()%></button>
+							<input type="text" name="service-id"
+								value="<%=s.getServiceID()%>" readonly="readonly"
+								style="display: none" />
+						</form>
+					</div>
+
 					<%
 					}
 					}
