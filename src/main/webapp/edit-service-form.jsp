@@ -41,7 +41,7 @@ Service service = (Service) request.getAttribute("loadService"); %>
 
     <div class="service-main-container">
       <div class="form-header">
-        <h1>Insert Service</h1>
+        <h1>Edit Service</h1>
       </div>
       <div id="center" class="form-body">
         <form action="editService" method="post" name="insertForm" id="insertForm">

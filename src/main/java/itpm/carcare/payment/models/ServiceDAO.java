@@ -260,10 +260,10 @@ public class ServiceDAO {
 	// get service by ID
 	public Service getService(int service_id) {
 		// log
-		System.out.println("\ngetService() => Getting Service");
+		System.out.println("\n => Getting Service");
 
 		Service service = new Service();
-		String GETSERVICE = "select * from bill where service_id = ?;";
+		String GETSERVICE = "select * from service where service_id = ?;";
 
 		try {
 			con = DBConnect.getConnection();

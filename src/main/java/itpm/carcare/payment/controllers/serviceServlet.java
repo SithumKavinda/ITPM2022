@@ -4,7 +4,6 @@ import java.io.IOException;
 import itpm.carcare.payment.models.Service;
 import itpm.carcare.payment.models.ServiceDAO;
 import itpm.carcare.payment.models.billDAO;
-import itpm.carcare.payment.models.categoryModel;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,12 +17,10 @@ public class serviceServlet extends HttpServlet {
 
 	private ServiceDAO serviceDAO;
 	private billDAO billDAO;
-	private categoryModel categoryModel;
 
 	public serviceServlet() {
 		serviceDAO = new ServiceDAO();
 		billDAO = new billDAO();
-		categoryModel = new categoryModel();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -165,12 +162,6 @@ public class serviceServlet extends HttpServlet {
 		case "/error":
 			loadError(request, response);
 			break;
-
-		case "/category":
-			// log
-			System.out.println("\n=========================");
-			System.out.println("Servlet: Category called");
-			categoryModel.getTable();
 		default:
 			break;
 		}

@@ -76,7 +76,7 @@ List<Service> serviceList = serviceDAO.getAllServices();
 							<form action="loadService" method="post">
 								<input name="service-id-edit" type="text"
 									value="<%=s.getServiceID()%>" style="display: none;">
-								<button id="btn_service">EDIT</button>
+								<button type="submit" id="btn_service">EDIT</button>
 							</form>
 						</td>
 
