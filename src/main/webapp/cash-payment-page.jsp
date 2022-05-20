@@ -44,7 +44,7 @@ request.getAttribute("total_amount"); %>
 
       <div class="cash-payment-body">
         <!-- form -->
-        <form id="cashForm" action="error" name="cashForm" method="post">
+        <form id="cashForm" action="printBill" name="cashForm" method="post">
           <!-- Display Total amount -->
           <div class="inline-lable-input">
             <div class="label">Total Amount:</div>

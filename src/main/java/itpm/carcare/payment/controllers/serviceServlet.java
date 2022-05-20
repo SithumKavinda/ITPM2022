@@ -157,7 +157,9 @@ public class serviceServlet extends HttpServlet {
 				System.out.println("Card Method selected");
 				proceedToCardPayment(request, response);
 			}
-
+			break;
+		case "/printBill":
+			printBill(request, response);
 			break;
 		case "/error":
 			loadError(request, response);
@@ -165,6 +167,14 @@ public class serviceServlet extends HttpServlet {
 		default:
 			break;
 		}
+	}
+
+	private void printBill(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+		billDAO.printBill();
+		billDAO.clearTable();
+		RequestDispatcher rs = request.getRequestDispatcher("billing_landing_page.jsp");
+		rs.forward(request, response);
 	}
 
 	private void loadError(HttpServletRequest request, HttpServletResponse response)

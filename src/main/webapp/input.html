@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title></title>
+    <style>
+      * {
+        /* border: 1px solid black; */
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 0;
+        font-family: "Courier New", Courier, monospace;
+        word-wrap: break-word;
+        text-align: center;
+        font-size: 10pt;
+      }
+
+      h1 {
+        font-size: 14pt;
+      }
+
+      h2 {
+        font-size: 12pt;
+      }
+
+      h3 {
+        font-size: 11pt;
+      }
+
+      p {
+        font-size: 10pt;
+      }
+
+      hr {
+        margin: 10px 15px 20px;
+        border: 1px dashed black;
+      }
+
+      body {
+        width: 80mm;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+      }
+
+      .main-container {
+        display: grid;
+        grid-template-columns: auto;
+      }
+
+      .body-headline {
+        padding: 0 0 20px;
+      }
+
+      .bill-details {
+        display: grid;
+        grid-template-columns: auto auto;
+        justify-content: space-around;
+        padding: 0 0 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px dashed black;
+        border-collapse: collapse;
+      }
+
+      table {
+        width: 100%;
+      }
+
+      th,
+      td {
+        padding: 5px;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+
+      .bill-table {
+        padding: 0 0 20px;
+      }
+
+      .footer h3 {
+        padding-top: 10px;
+      }
+    </style>
+  </head>
+  <body class="background-black">
+    <div class="main-container background-white">
+      <!-- Header -->
+      <div class="header">
+        <h1>CARCARE (PVT) LTD</h1>
+        <p>No : 05, Maradana, Colombo 10</p>
+        <p>Tel:+94 77 124 3564</p>
+        <p>Email:contact@carcare.lk</p>
+        <p>web:www.carcare.lk</p>
+      </div>
+
+      <!-- End of header -->
+      <hr />
+      <!-- body -->
+      <div class="body page-a4">
+        <!-- Body headline -->
+        <div class="body-headline">
+          <h2>INVOICE</h2>
+        </div>
+
+        <!-- bill details -->
+        <div class="bill-details">
+          <div class="label">Date:</div>
+          <div class="data">20/05/2022</div>
+        </div>
+
+        <div class="bill-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Service ID</th>
+                <th>Service Name</th>
+                <th>Discount</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>service name</td>
+                <td>10</td>
+                <td>1000.00</td>
+              </tr>
+
+              <tr>
+                <td colspan="3" class="bold">Bill Total</td>
+                <td class="bold">1000.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>If your have any concerns about this invoice, please contact</p>
+        <p>+94 77 123 1234</p>
+        <h3>Thank you for Your Business!</h3>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,10 +1,20 @@
 package itpm.carcare.payment.models;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import com.itextpdf.html2pdf.ConverterProperties;
+import com.itextpdf.html2pdf.HtmlConverter;
 
 import itpm.carcare.DBConnect;
 
@@ -143,5 +153,100 @@ public class billDAO {
 	}
 
 	// Generate Bills
+	public void printBill() {
+		String html = "";
+		List<Service> billList = getBillList();
 
+		html = "<!DOCTYPE html>\r\n" + "<html>\r\n" + "  <head>\r\n" + "    <meta charset=\"ISO-8859-1\" />\r\n"
+				+ "    <title></title>\r\n" + "    <style>\r\n" + "      * {\r\n"
+				+ "        /* border: 1px solid black; */\r\n" + "        scroll-behavior: smooth;\r\n"
+				+ "        margin: 0;\r\n" + "        padding: 0;\r\n"
+				+ "        font-family: \"Courier New\", Courier, monospace;\r\n" + "        word-wrap: break-word;\r\n"
+				+ "        text-align: center;\r\n" + "        font-size: 10pt;\r\n" + "      }\r\n" + "\r\n"
+				+ "      h1 {\r\n" + "        font-size: 14pt;\r\n" + "      }\r\n" + "\r\n" + "      h2 {\r\n"
+				+ "        font-size: 12pt;\r\n" + "      }\r\n" + "\r\n" + "      h3 {\r\n"
+				+ "        font-size: 11pt;\r\n" + "      }\r\n" + "\r\n" + "      p {\r\n"
+				+ "        font-size: 10pt;\r\n" + "      }\r\n" + "\r\n" + "      hr {\r\n"
+				+ "        margin: 10px 15px 20px;\r\n" + "        border: 1px dashed black;\r\n" + "      }\r\n"
+				+ "\r\n" + "      body {\r\n" + "        width: 80mm;\r\n" + "        height: fit-content;\r\n"
+				+ "        display: flex;\r\n" + "        justify-content: center;\r\n" + "        padding: 10px;\r\n"
+				+ "      }\r\n" + "\r\n" + "      .main-container {\r\n" + "        display: grid;\r\n"
+				+ "        grid-template-columns: auto;\r\n" + "      }\r\n" + "\r\n" + "      .body-headline {\r\n"
+				+ "        padding: 0 0 20px;\r\n" + "      }\r\n" + "\r\n" + "      .bill-details {\r\n"
+				+ "        display: grid;\r\n" + "        grid-template-columns: auto auto;\r\n"
+				+ "        justify-content: space-around;\r\n" + "        padding: 0 0 20px;\r\n" + "      }\r\n"
+				+ "\r\n" + "      table,\r\n" + "      th,\r\n" + "      td {\r\n"
+				+ "        border: 1px dashed black;\r\n" + "        border-collapse: collapse;\r\n" + "      }\r\n"
+				+ "\r\n" + "      table {\r\n" + "        width: 100%;\r\n" + "      }\r\n" + "\r\n" + "      th,\r\n"
+				+ "      td {\r\n" + "        padding: 5px;\r\n" + "      }\r\n" + "\r\n" + "      .bold {\r\n"
+				+ "        font-weight: bold;\r\n" + "      }\r\n" + "\r\n" + "      .bill-table {\r\n"
+				+ "        padding: 0 0 20px;\r\n" + "      }\r\n" + "\r\n" + "      .footer h3 {\r\n"
+				+ "        padding-top: 10px;\r\n" + "      }\r\n" + "    </style>\r\n" + "  </head>\r\n"
+				+ "  <body class=\"background-black\">\r\n" + "    <div class=\"main-container background-white\">\r\n"
+				+ "      <!-- Header -->\r\n" + "      <div class=\"header\">\r\n"
+				+ "        <h1>CARCARE (PVT) LTD</h1>\r\n" + "        <p>No : 05, Maradana, Colombo 10</p>\r\n"
+				+ "        <p>Tel:+94 77 124 3564</p>\r\n" + "        <p>Email:contact@carcare.lk</p>\r\n"
+				+ "        <p>web:www.carcare.lk</p>\r\n" + "      </div>\r\n" + "\r\n"
+				+ "      <!-- End of header -->\r\n" + "      <hr />\r\n" + "      <!-- body -->\r\n"
+				+ "      <div class=\"body page-a4\">\r\n" + "        <!-- Body headline -->\r\n"
+				+ "        <div class=\"body-headline\">\r\n" + "          <h2>INVOICE</h2>\r\n" + "        </div>\r\n"
+				+ "\r\n" + "        <!-- bill details -->\r\n" + "        <div class=\"bill-details\">\r\n"
+				+ "          <div class=\"label\">Date:</div>\r\n" + "          <div class=\"data\">";
+
+		// Date
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date date = new Date();
+		html += formatter.format(date);
+
+		html += "</div>\r\n" + "\r\n" + "        <div class=\"bill-table\">\r\n" + "          <table>\r\n"
+				+ "            <thead>\r\n" + "              <tr>\r\n" + "                <th>Service ID</th>\r\n"
+				+ "                <th>Service Name</th>\r\n" + "                <th>Discount</th>\r\n"
+				+ "                <th>Price</th>\r\n" + "              </tr>\r\n" + "            </thead>\r\n"
+				+ "            <tbody>";
+
+		// Table
+		if (!billList.isEmpty()) {
+			for (Service s : billList) {
+				html += "<tr>";
+				html += "<td>";
+				html += s.getServiceID();
+				html += "</td>";
+				html += "<td>";
+				html += s.getServiceName();
+				html += "</td>";
+				html += "<td>";
+				html += s.getDiscount();
+				html += "</td>";
+				html += "<td>";
+				html += s.getPrice();
+				html += "</td>";
+
+				html += "</tr>";
+			}
+		}
+
+		html += "<tr>\r\n" + "                <td colspan=\"3\" class=\"bold\">Bill Total</td>\r\n"
+				+ "                <td class=\"bold\">";
+
+		// Bill total
+		html += getBillTotal();
+		html += "</td>";
+		html += "</tr>\r\n" + "            </tbody>\r\n" + "          </table>\r\n" + "        </div>\r\n"
+				+ "      </div>\r\n" + "\r\n" + "      <!-- Footer -->\r\n" + "      <div class=\"footer\">\r\n"
+				+ "        <p>If your have any concerns about this invoice, please contact</p>\r\n"
+				+ "        <p>+94 77 123 1234</p>\r\n" + "        <h3>Thank you for Your Business!</h3>\r\n"
+				+ "      </div>\r\n" + "    </div>\r\n" + "  </body>\r\n" + "</html>";
+
+		// File htmlBill = new
+		// File("C:\\Users\\sithu\\git\\ITPM2022\\src\\main\\webapp\\input.jsp");
+		File pdfDest = new File("C:\\Users\\sithu\\OneDrive\\Desktop\\output.pdf");
+
+		ConverterProperties converterProperties = new ConverterProperties();
+		try {
+			HtmlConverter.convertToPdf(html, new FileOutputStream(pdfDest), converterProperties);
+			Desktop.getDesktop().open(pdfDest);
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+		}
+	}
 }

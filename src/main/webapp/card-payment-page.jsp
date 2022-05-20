@@ -42,7 +42,7 @@ pageEncoding="ISO-8859-1"%>
       </div>
 
       <div class="card-payment-body">
-        <form action="error" method="post" id="card-payment-form">
+        <form action="printBill" method="post" id="card-payment-form">
           <!-- Name of the card holder -->
           <div class="user-name">
             <input
