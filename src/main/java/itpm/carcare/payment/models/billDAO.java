@@ -8,13 +8,17 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.itextpdf.html2pdf.ConverterProperties;
 import com.itextpdf.html2pdf.HtmlConverter;
+import com.mysql.cj.protocol.Resultset;
 
 import itpm.carcare.DBConnect;
 
@@ -155,7 +159,16 @@ public class billDAO {
 	// Generate Bills
 	public void printBill() {
 		String html = "";
+		String bill_name_1st = "";
+		String bill_name_2nd = "";
+		String bill_name_3rd = "";
+		String GET_LAST_MONTH = "SELECT * FROM bill_name WHERE month = ?;";
+		String INSERT_BILL_NAME = "INSERT INTO `carcare`.`bill_name`(`bill_name`,`month`)VALUES(?,?);";
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
 		List<Service> billList = getBillList();
+		int count = 0;
 
 		html = "<!DOCTYPE html>\r\n" + "<html>\r\n" + "  <head>\r\n" + "    <meta charset=\"ISO-8859-1\" />\r\n"
 				+ "    <title></title>\r\n" + "    <style>\r\n" + "      * {\r\n"
@@ -237,15 +250,52 @@ public class billDAO {
 				+ "        <p>+94 77 123 1234</p>\r\n" + "        <h3>Thank you for Your Business!</h3>\r\n"
 				+ "      </div>\r\n" + "    </div>\r\n" + "  </body>\r\n" + "</html>";
 
-		// File htmlBill = new
-		// File("C:\\Users\\sithu\\git\\ITPM2022\\src\\main\\webapp\\input.jsp");
-		File pdfDest = new File("C:\\Users\\sithu\\OneDrive\\Desktop\\output.pdf");
+		// Generate file name
+		SimpleDateFormat fileNameGenFormatter = new SimpleDateFormat("yymm");
 
-		ConverterProperties converterProperties = new ConverterProperties();
+		// get month
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		int year = localDate.getYear();
+		int month = localDate.getMonthValue();
+
 		try {
+
+			bill_name_1st = String.valueOf(year - 2000);
+			bill_name_2nd = String.valueOf(month);
+
+			// Get bill name 2nd part
+			con = DBConnect.getConnection();
+			pst = con.prepareStatement(GET_LAST_MONTH);
+			pst.setInt(1, month);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				count += 1;
+			}
+
+			if (count != 0) {
+				count += 1;
+			} else if (count == 0) {
+				count = 1;
+			}
+
+			bill_name_3rd = String.valueOf(count);
+
+			String bill_name = bill_name_1st + bill_name_2nd + bill_name_3rd;
+			File pdfDest = new File(
+					"D:\\Education\\Year 03\\Semester 01\\IT3040 - IT Project Management\\Final project\\Generated Bills\\"
+							+ bill_name + ".pdf");
+			ConverterProperties converterProperties = new ConverterProperties();
+
 			HtmlConverter.convertToPdf(html, new FileOutputStream(pdfDest), converterProperties);
 			Desktop.getDesktop().open(pdfDest);
-		} catch (IOException e) {
+
+			// Insert bill id to DB
+			pst = con.prepareStatement(INSERT_BILL_NAME);
+			pst.setString(1, bill_name);
+			pst.setInt(2, month);
+			pst.execute();
+		} catch (IOException | SQLException e) {
 			System.err.println(e.getMessage());
 		}
 	}
