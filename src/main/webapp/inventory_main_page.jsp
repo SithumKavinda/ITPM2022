@@ -6,7 +6,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%
 InventoryItemDAO inventoryItemDAO = new InventoryItemDAO();
-List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResult");
+List<InventoryItem> inventoryList = inventoryItemDAO.getInventoryList();
+List<InventoryItem> searchedList = (ArrayList) request.getAttribute("searchResult");
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,10 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 	crossorigin="anonymous"></script>
 
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/inventory_main_page.css" />
+	href="https://cdn.jsdelivr.net/gh/SithumKavinda/css-cdn-itpm/inventory_main_page_update.css" /> 
+
+	<!-- <link rel="stylesheet" href="style/inventory/inventory_main_page_update.css"> -->
+
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
@@ -47,7 +51,7 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 								name="search-text">
 						</div>
 						<div class="search_button">
-							<input type="submit" value="Search" id="searchButton">
+							<input id="btn_search" type="submit" value="Search" id="searchButton">
 						</div>
 					</form>
 				</div>
@@ -66,12 +70,11 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 						</thead>
 						<tbody class="overflow-auto">
 							<%
-							if (!inventoryList.isEmpty()) {
-								for (InventoryItem i : inventoryList) {
+							for (InventoryItem i : inventoryList) {
 							%>
 							<tr class="">
 								<td class="col-md-1 text-center"><%=i.getInventoryID()%></td>
-								<td class="col-md-2 text-start"><%=i.getItemName()%></td>
+								<td class="col-md-2 text-start" id="itemName"><%=i.getItemName()%></td>
 								<td class="col-md-1 text-start"><%=i.getPurchasedPrice()%></td>
 								<td class="col-md-1 text-center"><%=i.getQuantity()%></td>
 								<td class="col-md-1 text-center">
@@ -79,7 +82,7 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 										<input type="text" name="inventory-id-main"
 											style="display: none;" readonly="readonly"
 											value="<%=i.getInventoryID()%>">
-										<button type="submit" id="btn_item">EDIT</button>
+										<button type="submit" id="btn_inventory">EDIT</button>
 									</form>
 								</td>
 								<td class="col-md-1 text-center">
@@ -87,13 +90,12 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 										<input type="text" name="inventoryID-inventory"
 											style="display: none;" readonly="readonly"
 											value="<%=i.getInventoryID()%>">
-										<button type="submit" id="btn_rm_item">REMOVE</button>
+										<button type="submit" id="btn_rm_inventory">REMOVE</button>
 									</form>
-
 								</td>
 							</tr>
+							
 							<%
-							}
 							}
 							%>
 
@@ -104,7 +106,7 @@ List<InventoryItem> inventoryList = (ArrayList) request.getAttribute("searchResu
 			<div class="button_group_section">
 				<div>
 					<form action="addInventoryPage" method="post">
-						<button type="submit">Add Inventory</button>
+						<button id="btn-nav" type="submit">Add Inventory</button>
 					</form>
 				</div>
 
