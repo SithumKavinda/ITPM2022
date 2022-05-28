@@ -263,7 +263,7 @@ public class billDAO {
 			bill_name_1st = String.valueOf(year - 2000);
 			bill_name_2nd = String.valueOf(month);
 
-			// Get bill name 2nd part
+			// Get bill name 3rd part
 			con = DBConnect.getConnection();
 			pst = con.prepareStatement(GET_LAST_MONTH);
 			pst.setInt(1, month);
